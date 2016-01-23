@@ -1,0 +1,22 @@
+<html>
+<head>
+
+	<script>
+		function toggle(){
+			var d=document.getElementById('toto');
+			if (d!=null){
+				d.style.display="block";
+			}
+		}
+	</script>
+</head>
+<body>
+
+<button onclick="blu_event('connect','127.0.0.1');" style="width:250;height:150">Connect</button>
+<h1><a href="#" onclick="blu_event('click_me','hello there!')">Click me!</a><h1>
+<img src="face3.png" onclick="toggle();">
+<div style="display:None" id="toto">
+<button>Test</button>
+</div>
+</body>
+</html>
