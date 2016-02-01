@@ -2,8 +2,11 @@
 
 #pragma once
 
+#include "ShimServer.h"
 #include "Engine/GameInstance.h"
+#include "ThreadingBase.h"
 #include "MyGameInstance.generated.h"
+
 
 /**
  * 
@@ -15,6 +18,8 @@ class POCSHIM_API UMyGameInstance : public UGameInstance
 public:
 		UFUNCTION(BlueprintCallable, Category = "Session")
 		bool ClientTravelToServer(FString ip);
-	
+		FRunnableThread* Thread;
+		UMyGameInstance();
+		static UMyGameInstance *instance;
 	
 };
