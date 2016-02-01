@@ -4,22 +4,20 @@
 #include "MyGameInstance.h"
 
 UMyGameInstance::UMyGameInstance() {
-	if (!UMyGameInstance::instance) {
-
-
-		ShimServer * instance = ShimServer::getInstance();
-		if (instance) {
-			bool connected = instance->connect();
-			if (connected) {
-				//std::thread thread_1 = std::thread(&ShimServer::listen,instance);
-				Thread = FRunnableThread::Create(instance, TEXT("FPrimeNumberWorker"), true, true, 0, TPri_BelowNormal);
-			}
-		}
-		UMyGameInstance::instance = this;
-	}
 
 }
+
 UMyGameInstance *UMyGameInstance::instance = nullptr;
+
+void UMyGameInstance::initialize() {
+	ShimServer * instance = ShimServer::getInstance();
+	if (instance) {
+		bool connected = instance->connect();
+		if (connected) {
+			Thread = FRunnableThread::Create(instance, TEXT("FPrimeNumberWorker"),  0, TPri_BelowNormal);
+		}
+	}
+}
 
 bool UMyGameInstance::ClientTravelToServer(FString ip) {
 

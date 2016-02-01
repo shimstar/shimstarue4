@@ -16,8 +16,10 @@ class POCSHIM_API UMyGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
 public:
-		UFUNCTION(BlueprintCallable, Category = "Session")
+		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
 		bool ClientTravelToServer(FString ip);
+		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
+			void initialize();
 		FRunnableThread* Thread;
 		UMyGameInstance();
 		static UMyGameInstance *instance;
