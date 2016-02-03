@@ -12,10 +12,22 @@ ShimServer::ShimServer()
 ShimServer::~ShimServer()
 {
 }
-void ShimServer::TCPConnectionListener() {
-	
-}
 
+MessageServer *ShimServer::getMessage(FString code) {
+	int index = -1;
+	MessageServer *returnValue = nullptr;
+	for (int i=0;i < listOfMessage.size();i++) {
+		if (listOfMessage[i]->getValue("code") == code) {
+			index = i;
+			returnValue = listOfMessage[i];
+			break;
+		}
+	}
+	if (index != -1) {
+		listOfMessage.erase(listOfMessage.begin() + index);
+	}
+	return returnValue;
+}
 
 bool ShimServer::connect() {
 	this->ConnectionSocket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket(NAME_Stream, TEXT("default"), false);
@@ -35,52 +47,21 @@ bool ShimServer::connect() {
 
 	ConnectionSocket->SetReceiveBufferSize(ReceiveBufferSize, NewSize);
 
-	//GetWorldTimerManager();
-	//listener = FTcpSocketBuilder("shimstar");//.BoundToEndpoint(Endpoint);
-	/*	.AsReusable()
-		.BoundToEndpoint(Endpoint)
-		.Listening(8);
-
-	//Set Buffer Size
-	int32 NewSize = 0;
-	listener->SetReceiveBufferSize(8890, NewSize);*/
-//	GetWorldTimerManager().SetTimer(this,
-//		&ShimServer::TCPConnectionListener, 0.01, true);
-
-	/*FIPv4Address ip;
-	FIPv4Address::Parse(address, ip);
-
-	*/
-	/*TSharedRef<FInternetAddr> addr = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
-	addr->SetIp(ip.GetValue());
-	addr->SetPort(port);
-	
-	bool connected = this->ConnectionSocket->Connect(*addr);
-	*/
 
 
+	return connected;
+}
 
-	return true;
+void ShimServer::sendMsg(FString val) {
+
+	TCHAR *serializedChar = val.GetCharArray().GetData();
+	int32 size = FCString::Strlen(serializedChar);
+	int32 sent = 0;
+	bool successful = ConnectionSocket->Send((uint8*)TCHAR_TO_UTF8(serializedChar), size, sent);
 }
 
 bool ShimServer::Init() {
-	this->ConnectionSocket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket(NAME_Stream, TEXT("default"), false);
-
-
-	FString address = TEXT("127.0.0.1");
-	int32 port = 5000;
-	FIPv4Address ip;
-	FIPv4Address::Parse(address, ip);
-	TSharedRef<FInternetAddr> addr = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
-	addr->SetIp(ip.GetValue());
-	addr->SetPort(port);
-
-	bool connected = this->ConnectionSocket->Connect(*addr);
-	int32 NewSize = 0;
-	int32 ReceiveBufferSize = 8890;
-
-	ConnectionSocket->SetReceiveBufferSize(ReceiveBufferSize, NewSize);
-	return connected;
+	return true;
 }
 
 uint32 ShimServer::Run() {
@@ -108,7 +89,25 @@ uint32 ShimServer::Run() {
 		}else{
 			//UE_LOG(ShimLog, Warning, TEXT("PPPPPP DATA RECEIVED %d"), ReceivedData.Num());
 			const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
-			UE_LOG(ShimLog, Warning, TEXT("PPPP %s"),*ReceivedUE4String);
+			/*UE_LOG(ShimLog, Warning, TEXT("PPPP %s"),*ReceivedUE4String);
+			if (ReceivedUE4String.Contains("Welcome")) {
+				sendMsg(TEXT("{\"code\":\"1\",\"login\":\"shimrod\",\"password\":\"shimrod\"}"));
+			}
+			else {*/
+				TSharedPtr<FJsonObject> JsonParsed;
+
+				TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(ReceivedUE4String);
+
+				if (FJsonSerializer::Deserialize(JsonReader, JsonParsed))
+				{
+					MessageServer *temp = new MessageServer();
+					temp->setObj(JsonParsed);
+					listOfMessage.push_back(temp);
+
+				}
+			//}
+
+
 		}
 	}
 	return 0;

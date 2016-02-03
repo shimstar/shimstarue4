@@ -3,11 +3,9 @@
 #include "pocshim.h"
 #include "MyGameInstance.h"
 
-UMyGameInstance::UMyGameInstance() {
 
-}
 
-UMyGameInstance *UMyGameInstance::instance = nullptr;
+
 
 void UMyGameInstance::initialize() {
 	ShimServer * instance = ShimServer::getInstance();

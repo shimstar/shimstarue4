@@ -21,7 +21,6 @@ public:
 		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
 			void initialize();
 		FRunnableThread* Thread;
-		UMyGameInstance();
-		static UMyGameInstance *instance;
+
 	
 };
