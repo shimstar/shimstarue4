@@ -22,5 +22,9 @@ public:
 			void initialize();
 		FRunnableThread* Thread;
 
-	
+		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
+			void loginShimstar(FString login, FString password);
+		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
+			int32 statusLogin();
+
 };

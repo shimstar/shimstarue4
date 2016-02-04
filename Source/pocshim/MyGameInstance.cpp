@@ -4,11 +4,28 @@
 #include "MyGameInstance.h"
 
 
+void UMyGameInstance::loginShimstar(FString login, FString password) {
+	UShimServer * instance = UShimServer::getInstance();
+	if (instance) {
+		instance->sendMsg(TEXT("{\"code\":\"1\",\"login\":\"" + login + "\",\"password\":\"" + password + "\"}"));
+	}
+}
 
+int32 UMyGameInstance::statusLogin() {
+	int32 returnStatus = -1;
+	UShimServer * instance = UShimServer::getInstance();
+	if (instance) {
+		MessageServer *message = instance->getMessage("1");
+		if (message) {
+			returnStatus = FCString::Atoi(*message->getValue("status"));
+		}
+	}
 
+	return returnStatus;
+}
 
 void UMyGameInstance::initialize() {
-	ShimServer * instance = ShimServer::getInstance();
+	UShimServer * instance = UShimServer::getInstance();
 	if (instance) {
 		bool connected = instance->connect();
 		if (connected) {
@@ -16,6 +33,7 @@ void UMyGameInstance::initialize() {
 		}
 	}
 }
+
 
 bool UMyGameInstance::ClientTravelToServer(FString ip) {
 

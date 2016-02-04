@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Shimstar</title>
+	<link rel="stylesheet" href="shimstar.css" type="text/css" media="screen"/>
+	<script>
+		function hideConnect(hide){
+		if (hide){
+			document.getElementById('button_connect').style.display="None";
+			}else{
+			document.getElementById('button_connect').style.display="block";
+			}
+		}
+		function hidePlay(hide){
+			if (hide){
+			document.getElementById('button_play').style.display="None";
+			}else{
+			document.getElementById('button_play').style.display="block";
+			}
+		}
+	</script>
+</head>
+<body>
+<script src="jquery-2.2.0.min.js"></script>
+<script src="jquery-ui.min.js"></script>
+
+<div id="login_div" class="login_box blurred-bg">
+
+<h1>Identification</h1>
+<p>
+	<label>Serveur</label>
+	<select id = "server_ip">
+		<option value="127.0.0.1">127.0.0.1</option>
+		<option value="88.179.43.60">88.179.43.60</option>
+	</select>
+</p>
+<p>
+	<label>Nom</label>
+	<input type="text" id="login_name" value="" />
+</p>
+<p>
+	<label>Mot de passe</label>
+	<input type="password" id="password" value="" />
+</p>
+<div id="button_connect">
+<p>
+	<!--<a onclick="javascript:document.getElementById('login_div').style.opacity='0'" href="#" class="connect_button">Connexion</a>-->
+	<a onclick="javascript:blu_event('login',document.getElementById('login_name').value + ';' + document.getElementById('password').value)" href="#" class="connect_button">Connexion</a>
+</p>
+</div>
+<div id="button_play" style="display:None">
+<p>
+	<!--<a onclick="javascript:document.getElementById('login_div').style.opacity='0'" href="#" class="connect_button">Connexion</a>-->
+	<a onclick="javascript:blu_event('play','')" href="#" class="connect_button">Jouer</a>
+</p>
+</div>
+</div>
+</div>
+
+<script>
+$(function () {
+    $('.login_box').draggable();
+});
+</script>
+</body>
+</html>

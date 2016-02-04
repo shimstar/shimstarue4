@@ -1,7 +1,17 @@
 <html>
 <head>
 	<link rel="stylesheet" href="shimstar.css">
-
+<style>
+select option:checked:after {
+    content: attr(title);
+    background: #ff0000;
+    color: #ff0000;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    border: none;
+}
+</style>
 	<script>
 		function toggle(){
 			var d=document.getElementById('toto');
@@ -12,6 +22,11 @@
 	</script>
 </head>
 <body bgcolor="#000000">
+<select>
+<option> test</option>
+<option> testeeee</option>
+<option> testeeeeazezae</option>
+</select>
 <table><tr>
 <td>
 <button class="button3" onclick="blu_event('connect','127.0.0.1');">Connect</button>

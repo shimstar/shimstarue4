@@ -5,15 +5,15 @@
 
 
 DEFINE_LOG_CATEGORY(ShimLog);
-ShimServer::ShimServer()
+UShimServer::UShimServer()
 {
 }
 
-ShimServer::~ShimServer()
+UShimServer::~UShimServer()
 {
 }
 
-MessageServer *ShimServer::getMessage(FString code) {
+MessageServer *UShimServer::getMessage(FString code) {
 	int index = -1;
 	MessageServer *returnValue = nullptr;
 	for (int i=0;i < listOfMessage.size();i++) {
@@ -29,7 +29,7 @@ MessageServer *ShimServer::getMessage(FString code) {
 	return returnValue;
 }
 
-bool ShimServer::connect() {
+bool UShimServer::connect() {
 	this->ConnectionSocket = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateSocket(NAME_Stream, TEXT("default"), false);
 
 
@@ -52,7 +52,7 @@ bool ShimServer::connect() {
 	return connected;
 }
 
-void ShimServer::sendMsg(FString val) {
+void UShimServer::sendMsg(FString val) {
 
 	TCHAR *serializedChar = val.GetCharArray().GetData();
 	int32 size = FCString::Strlen(serializedChar);
@@ -60,11 +60,11 @@ void ShimServer::sendMsg(FString val) {
 	bool successful = ConnectionSocket->Send((uint8*)TCHAR_TO_UTF8(serializedChar), size, sent);
 }
 
-bool ShimServer::Init() {
+bool UShimServer::Init() {
 	return true;
 }
 
-uint32 ShimServer::Run() {
+uint32 UShimServer::Run() {
 
 	
 	while(1){
@@ -89,8 +89,8 @@ uint32 ShimServer::Run() {
 		}else{
 			//UE_LOG(ShimLog, Warning, TEXT("PPPPPP DATA RECEIVED %d"), ReceivedData.Num());
 			const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
-			/*UE_LOG(ShimLog, Warning, TEXT("PPPP %s"),*ReceivedUE4String);
-			if (ReceivedUE4String.Contains("Welcome")) {
+			UE_LOG(ShimLog, Warning, TEXT("PPPP %s"),*ReceivedUE4String);
+			/*if (ReceivedUE4String.Contains("Welcome")) {
 				sendMsg(TEXT("{\"code\":\"1\",\"login\":\"shimrod\",\"password\":\"shimrod\"}"));
 			}
 			else {*/
@@ -113,22 +113,22 @@ uint32 ShimServer::Run() {
 	return 0;
 }
 
-void ShimServer::Stop() {
+void UShimServer::Stop() {
 
 }
 
 
 
-ShimServer*  ShimServer::getInstance() {
-	if (!ShimServer::instance) {
-		ShimServer::instance = new ShimServer();
+UShimServer*  UShimServer::getInstance() {
+	if (!UShimServer::instance) {
+		UShimServer::instance = new UShimServer();
 	}
-	return ShimServer::instance;
+	return UShimServer::instance;
 }
 
-ShimServer* ShimServer::instance = nullptr;
+UShimServer* UShimServer::instance = nullptr;
 
-FString ShimServer::StringFromBinaryArray(const TArray<uint8>& BinaryArray)
+FString UShimServer::StringFromBinaryArray(const TArray<uint8>& BinaryArray)
 {
 	//Create a string from a byte array!
 	std::string cstr(reinterpret_cast<const char*>(BinaryArray.GetData()), BinaryArray.Num());

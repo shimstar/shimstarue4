@@ -15,11 +15,12 @@ DECLARE_LOG_CATEGORY_EXTERN(ShimLog, Verbose, All);
 /**
  * 
  */
-class POCSHIM_API ShimServer : public FRunnable
+//UCLASS(Blueprintable)
+class POCSHIM_API UShimServer : public FRunnable
 
 {
 public:
-	static ShimServer* getInstance();
+	static UShimServer* getInstance();
 	virtual bool Init();
 	virtual uint32 Run();
 	virtual void Stop();
@@ -31,10 +32,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "ShimServer")
 		void sendMsg(FString);
 private:
-	ShimServer();
-	~ShimServer();
+	UShimServer();
+	~UShimServer();
 	
-	static ShimServer *instance;
+	static UShimServer *instance;
 
 	FSocket* ConnectionSocket;
 	FSocket* listener;
