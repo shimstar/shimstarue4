@@ -6,32 +6,43 @@
 	<link rel="stylesheet" href="shimstar.css" type="text/css" media="screen"/>
 	<link rel="stylesheet" href="animate.css" type="text/css" media="screen"/>
 	<script>
+	
+	
+		function showError(hide){
+			document.getElementById('message').innerHTML="Connexion echouee";
+			document.getElementById('button_reconnect').style.display="block";
+		}
+	
 		function hideConnect(hide){
 		if (hide){
 			//document.getElementById('button_connect').style.display="None";
-				$('#login_div').removeClass('animated flipInX');
+				$('#login_div').removeClass('animated zoomIn');
 				$('#login_div').addClass('animated flipOutX');
 				hideMessage(false);
 			}else{
 			//document.getElementById('button_connect').style.display="block";
 				$('#login_div').removeClass('animated flipOutX');
-				$('#login_div').addClass('animated flipInX');
+				$('#login_div').addClass('animated zoomIn');
 				hideMessage(true);
 			}
 		}
 		function hideMessage(hide){
 			if (hide){
-				$('#message_div').removeClass('animated flipInX')
+				$('#message_div').removeClass('animated zoomIn')
 				$('#message_div').addClass('animated flipOutX');
 				
 			}else{
 				document.getElementById('message_div').style.display="block";
+				document.getElementById('message').innerHTML="Tentative de connexion";
+				document.getElementById('button_reconnect').style.display="None";
+				document.getElementById('button_play').style.display="None";
 				$('#message_div').removeClass('animated flipOutX');
-				$('#message_div').addClass('animated flipInX');
+				$('#message_div').addClass('animated zoomIn');
 			}
 		}
 		function hidePlay(hide){
 			if (!hide){
+				document.getElementById('message').innerHTML="Connexion reussie";
 				document.getElementById('button_play').style.display="block";
 				$('#button_play').removeClass('animated zoomOut');
 				$('#button_play').addClass('animated zoomIn');
@@ -72,14 +83,21 @@
 </div>
 <!--<a onclick="javascript:document.getElementById('message_div').style.display='Block';$('#message_div').removeClass('animated flipOutX');$('#message_div').addClass('animated flipInX');" href="#" class="connect_button">Jouer</a>-->
 <div id="message_div" class="login_box blurred-bg" style="display:None">
-	<h2>Login In Progress<h2/>
+	<h2 id="message">Login In Progress<h2/>
 	<div id="button_play" style="display:None">
 		<p>
 			<!--<a onclick="javascript:document.getElementById('login_div').style.opacity='0'" href="#" class="connect_button">Connexion</a>-->
 			<a onclick="javascript:blu_event('play','')" href="#" class="connect_button">Jouer</a>
 		</p>
 	</div>
+	<div id="button_reconnect" style="display:None">
+		<p>
+			<!--<a onclick="javascript:document.getElementById('login_div').style.opacity='0'" href="#" class="connect_button">Connexion</a>-->
+			<a onclick="javascript:hideConnect(false);" href="#" class="connect_button">Se reconnecter</a>
+		</p>
+	</div>
 </div>
+
 <script>
 $(function () {
     $('.login_box').draggable();
