@@ -25,16 +25,16 @@ public:
 	virtual uint32 Run();
 	virtual void Stop();
 	bool connect();
-	UFUNCTION(BlueprintCallable, Category = "ShimServer")
+	
 	MessageServer *getMessage(FString code);
-
-
-	UFUNCTION(BlueprintCallable, Category = "ShimServer")
+	void getMessages();
+	bool isConnected();
+	
 		void sendMsg(FString);
 private:
 	UShimServer();
 	~UShimServer();
-	
+	bool connected;
 	static UShimServer *instance;
 
 	FSocket* ConnectionSocket;

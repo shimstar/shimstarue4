@@ -26,5 +26,8 @@ public:
 			void loginShimstar(FString login, FString password);
 		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
 			int32 statusLogin();
-
+		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
+			void callServer();
+		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
+			bool isConnected();
 };

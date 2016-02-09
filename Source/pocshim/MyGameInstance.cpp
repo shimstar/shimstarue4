@@ -24,12 +24,31 @@ int32 UMyGameInstance::statusLogin() {
 	return returnStatus;
 }
 
+bool UMyGameInstance::isConnected() {
+	UShimServer * instance = UShimServer::getInstance();
+	if (instance) {
+		return instance->isConnected();
+	}
+	else {
+		return false;
+	}
+}
+
 void UMyGameInstance::initialize() {
 	UShimServer * instance = UShimServer::getInstance();
 	if (instance) {
 		bool connected = instance->connect();
 		if (connected) {
-			Thread = FRunnableThread::Create(instance, TEXT("FPrimeNumberWorker"),  0, TPri_BelowNormal);
+			//Thread = FRunnableThread::Create(instance, TEXT("FPrimeNumberWorker"),  0, TPri_BelowNormal);
+		}
+	}
+}
+
+void UMyGameInstance::callServer() {
+	UShimServer * instance = UShimServer::getInstance();
+	if (instance) {
+		if (instance->isConnected()) {
+			instance->getMessages();
 		}
 	}
 }

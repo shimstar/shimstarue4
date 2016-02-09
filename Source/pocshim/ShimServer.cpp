@@ -47,9 +47,13 @@ bool UShimServer::connect() {
 
 	ConnectionSocket->SetReceiveBufferSize(ReceiveBufferSize, NewSize);
 
-
+	this->connected = connected;
 
 	return connected;
+}
+
+bool UShimServer::isConnected() {
+	return this->connected;
 }
 
 void UShimServer::sendMsg(FString val) {
@@ -62,6 +66,48 @@ void UShimServer::sendMsg(FString val) {
 
 bool UShimServer::Init() {
 	return true;
+}
+
+void UShimServer::getMessages() {
+	TArray<uint8> ReceivedData;
+
+	uint32 Size;
+	while (ConnectionSocket->HasPendingData(Size))
+	{
+		ReceivedData.Init(FMath::Min(Size, 65507u));
+
+		int32 Read = 0;
+		ConnectionSocket->Recv(ReceivedData.GetData(), ReceivedData.Num(), Read);
+
+		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Data Read! %d"), ReceivedData.Num()));
+	}
+	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	if (ReceivedData.Num() <= 0)
+	{
+		//	UE_LOG(ShimLog, Warning, TEXT("POGGGGGGGGGGGGG NO DATA RECEIVED"));
+
+	}
+	else {
+		//UE_LOG(ShimLog, Warning, TEXT("PPPPPP DATA RECEIVED %d"), ReceivedData.Num());
+		const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
+		UE_LOG(ShimLog, Warning, TEXT("PPPP %s"), *ReceivedUE4String);
+		/*if (ReceivedUE4String.Contains("Welcome")) {
+		sendMsg(TEXT("{\"code\":\"1\",\"login\":\"shimrod\",\"password\":\"shimrod\"}"));
+		}
+		else {*/
+		TSharedPtr<FJsonObject> JsonParsed;
+
+		TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(ReceivedUE4String);
+
+		if (FJsonSerializer::Deserialize(JsonReader, JsonParsed))
+		{
+			MessageServer *temp = new MessageServer();
+			temp->setObj(JsonParsed);
+			listOfMessage.push_back(temp);
+
+		}
+	}
 }
 
 uint32 UShimServer::Run() {
