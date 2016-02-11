@@ -6,7 +6,15 @@
 	<link rel="stylesheet" href="shimstar.css" type="text/css" media="screen"/>
 	<link rel="stylesheet" href="animate.css" type="text/css" media="screen"/>
 	<script>
-	
+		function connected(val){
+			if(val){
+				document.getElementById('button_connect').style.display="Block";
+				document.getElementById('button_notconnect').style.display="None";
+			}else{
+				document.getElementById('button_connect').style.display="None";
+				document.getElementById('button_notconnect').style.display="Block";
+			}
+		}
 	
 		function showError(hide){
 			document.getElementById('message').innerHTML="Connexion echouee";
@@ -48,6 +56,11 @@
 				$('#button_play').addClass('animated zoomIn');
 			}
 		}
+		
+		function showLoading(){
+			document.getElementById('button_play').style.display="None";
+			document.getElementById('message').innerHTML="Chargement en cours";
+		}
 	</script>
 </head>
 <body>
@@ -78,7 +91,8 @@
 	<a onclick="javascript:blu_event('login',document.getElementById('login_name').value + ';' + document.getElementById('password').value)" href="#" class="connect_button">Connexion</a>
 </p>
 </div>
-
+<div id="button_notconnect" style="display:None">
+	<p class="connect_button2">not connected</p>
 </div>
 </div>
 <!--<a onclick="javascript:document.getElementById('message_div').style.display='Block';$('#message_div').removeClass('animated flipOutX');$('#message_div').addClass('animated flipInX');" href="#" class="connect_button">Jouer</a>-->
@@ -87,9 +101,10 @@
 	<div id="button_play" style="display:None">
 		<p>
 			<!--<a onclick="javascript:document.getElementById('login_div').style.opacity='0'" href="#" class="connect_button">Connexion</a>-->
-			<a onclick="javascript:blu_event('play','')" href="#" class="connect_button">Jouer</a>
+			<a onclick="javascript:blu_event('play','');showLoading()" href="#" class="connect_button">Jouer</a>
 		</p>
 	</div>
+
 	<div id="button_reconnect" style="display:None">
 		<p>
 			<!--<a onclick="javascript:document.getElementById('login_div').style.opacity='0'" href="#" class="connect_button">Connexion</a>-->
