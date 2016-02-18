@@ -61,6 +61,11 @@
 			document.getElementById('button_play').style.display="None";
 			document.getElementById('message').innerHTML="Chargement en cours";
 		}
+		function play(){
+			var optionSelected = document.getElementById('server_ip').selectedIndex;
+			var valSelected = document.getElementById('server_ip')[optionSelected].text;
+			blu_event('play',valSelected);
+		}
 	</script>
 </head>
 <body>
@@ -101,7 +106,7 @@
 	<div id="button_play" style="display:None">
 		<p>
 			<!--<a onclick="javascript:document.getElementById('login_div').style.opacity='0'" href="#" class="connect_button">Connexion</a>-->
-			<a onclick="javascript:blu_event('play','');showLoading()" href="#" class="connect_button">Jouer</a>
+			<a onclick="javascript:play();showLoading()" href="#" class="connect_button">Jouer</a>
 		</p>
 	</div>
 
