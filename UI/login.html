@@ -90,7 +90,7 @@
 	<label>Mot de passe</label>
 	<input type="password" id="password" value="" />
 </p>
-<div id="button_connect">
+<div id="button_connect" style="display:None">
 <p>
 	<!--<a onclick="javascript:$('#login_div').addClass('animated flipOutX')" href="#" class="connect_button">Connexion</a>-->
 	<a onclick="javascript:blu_event('login',document.getElementById('login_name').value + ';' + document.getElementById('password').value)" href="#" class="connect_button">Connexion</a>
@@ -98,6 +98,12 @@
 </div>
 <div id="button_notconnect" style="display:None">
 	<p class="connect_button2">not connected</p>
+</div>
+	<div id="button_connect2">
+<p>
+	<!--<a onclick="javascript:$('#login_div').addClass('animated flipOutX')" href="#" class="connect_button">Connexion</a>-->
+	<a onclick="javascript:blu_event('login',document.getElementById('login_name').value + ';' + document.getElementById('password').value)" href="#" class="connect_button" style="width:100px">&nbsp;</a>
+</p>
 </div>
 </div>
 <!--<a onclick="javascript:document.getElementById('message_div').style.display='Block';$('#message_div').removeClass('animated flipOutX');$('#message_div').addClass('animated flipInX');" href="#" class="connect_button">Jouer</a>-->
@@ -116,6 +122,7 @@
 			<a onclick="javascript:hideConnect(false);" href="#" class="connect_button">Se reconnecter</a>
 		</p>
 	</div>
+
 </div>
 
 <script>
