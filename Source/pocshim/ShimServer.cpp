@@ -16,7 +16,9 @@ UShimServer::~UShimServer()
 MessageServer *UShimServer::getMessage(FString code) {
 	int index = -1;
 	MessageServer *returnValue = nullptr;
+	int ss = listOfMessage.size();
 	for (int i=0;i < listOfMessage.size();i++) {
+		FString val = listOfMessage[i]->getValue("code");
 		if (listOfMessage[i]->getValue("code") == code) {
 			index = i;
 			returnValue = listOfMessage[i];
@@ -38,7 +40,7 @@ bool UShimServer::connect() {
 	FIPv4Address ip;
 	FIPv4Address::Parse(address, ip);
 	TSharedRef<FInternetAddr> addr = ISocketSubsystem::Get(PLATFORM_SOCKETSUBSYSTEM)->CreateInternetAddr();
-	addr->SetIp(ip.GetValue());
+	addr->SetIp(ip.Value);
 	addr->SetPort(port);
 
 	bool connected = this->ConnectionSocket->Connect(*addr);
@@ -64,17 +66,17 @@ void UShimServer::sendMsg(FString val) {
 	bool successful = ConnectionSocket->Send((uint8*)TCHAR_TO_UTF8(serializedChar), size, sent);
 }
 
-bool UShimServer::Init() {
+/*bool UShimServer::Init() {
 	return true;
-}
+}*/
 
 void UShimServer::getMessages() {
 	TArray<uint8> ReceivedData;
-
+	
 	uint32 Size;
 	while (ConnectionSocket->HasPendingData(Size))
 	{
-		ReceivedData.Init(FMath::Min(Size, 65507u));
+		ReceivedData.Init(FMath::Min(Size, 65507u),64);
 
 		int32 Read = 0;
 		ConnectionSocket->Recv(ReceivedData.GetData(), ReceivedData.Num(), Read);
@@ -89,27 +91,27 @@ void UShimServer::getMessages() {
 
 	}
 	else {
-		//UE_LOG(ShimLog, Warning, TEXT("PPPPPP DATA RECEIVED %d"), ReceivedData.Num());
 		const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
-		UE_LOG(ShimLog, Warning, TEXT("PPPP %s"), *ReceivedUE4String);
-		/*if (ReceivedUE4String.Contains("Welcome")) {
-		sendMsg(TEXT("{\"code\":\"1\",\"login\":\"shimrod\",\"password\":\"shimrod\"}"));
-		}
-		else {*/
+
+		int posLast = -1;
+		ReceivedUE4String.FindLastChar('}', posLast);
+		int len = ReceivedUE4String.Len();
+		FString tempReceived = ReceivedUE4String.Mid(0, posLast+1);
+
 		TSharedPtr<FJsonObject> JsonParsed;
 
-		TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(ReceivedUE4String);
+		TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(tempReceived);
 
 		if (FJsonSerializer::Deserialize(JsonReader, JsonParsed))
 		{
 			MessageServer *temp = new MessageServer();
 			temp->setObj(JsonParsed);
 			listOfMessage.push_back(temp);
-
+			int ss = listOfMessage.size();
 		}
 	}
 }
-
+/*
 uint32 UShimServer::Run() {
 
 	
@@ -119,7 +121,7 @@ uint32 UShimServer::Run() {
 		uint32 Size;
 		while (ConnectionSocket->HasPendingData(Size))
 		{
-			ReceivedData.Init(FMath::Min(Size, 65507u));
+			ReceivedData.Init(FMath::Min(Size, 65507u),64);
 
 			int32 Read = 0;
 			ConnectionSocket->Recv(ReceivedData.GetData(), ReceivedData.Num(), Read);
@@ -136,10 +138,10 @@ uint32 UShimServer::Run() {
 			//UE_LOG(ShimLog, Warning, TEXT("PPPPPP DATA RECEIVED %d"), ReceivedData.Num());
 			const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
 			UE_LOG(ShimLog, Warning, TEXT("PPPP %s"),*ReceivedUE4String);
-			/*if (ReceivedUE4String.Contains("Welcome")) {
-				sendMsg(TEXT("{\"code\":\"1\",\"login\":\"shimrod\",\"password\":\"shimrod\"}"));
-			}
-			else {*/
+			//if (ReceivedUE4String.Contains("Welcome")) {
+			//	sendMsg(TEXT("{\"code\":\"1\",\"login\":\"shimrod\",\"password\":\"shimrod\"}"));
+			//}
+			//else {
 				TSharedPtr<FJsonObject> JsonParsed;
 
 				TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(ReceivedUE4String);
@@ -158,10 +160,11 @@ uint32 UShimServer::Run() {
 	}
 	return 0;
 }
-
+*/
+/*
 void UShimServer::Stop() {
 
-}
+}*/
 
 
 

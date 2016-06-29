@@ -16,14 +16,14 @@ DECLARE_LOG_CATEGORY_EXTERN(ShimLog, Verbose, All);
  * 
  */
 //UCLASS(Blueprintable)
-class POCSHIM_API UShimServer : public FRunnable
+class POCSHIM_API UShimServer// : public FRunnable
 
 {
 public:
 	static UShimServer* getInstance();
-	virtual bool Init();
-	virtual uint32 Run();
-	virtual void Stop();
+	//virtual bool Init();
+	//virtual uint32 Run();
+	//virtual void Stop();
 	bool connect();
 	
 	MessageServer *getMessage(FString code);
