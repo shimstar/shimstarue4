@@ -6,11 +6,16 @@
 ShimObjectif::ShimObjectif()
 {
 	id = 1;
-	name = "destroy petit pirate";
+	name = "Petit pirate";
 	nbShip = 1;
 	actualNbShip = 0;
 	status = 0;
 	typeObjectif = 1;
+}
+
+FString ShimObjectif::getObjectif() {
+	FString result = name + " : " + FString::FromInt(actualNbShip) + " / "  + FString::FromInt(nbShip);
+	return result;
 }
 
 ShimObjectif::~ShimObjectif()

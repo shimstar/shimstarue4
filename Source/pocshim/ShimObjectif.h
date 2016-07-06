@@ -15,6 +15,7 @@ private:
 	int typeObjectif;
 	int status;
 public:
+	FString getObjectif();
 	ShimObjectif();
 	~ShimObjectif();
 };

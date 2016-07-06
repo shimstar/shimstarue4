@@ -24,6 +24,8 @@ protected:
 		int MissionStatus;
 	UPROPERTY(BlueprintReadOnly, Category = MissionUI)
 		FText MissionText;
+	UPROPERTY(BlueprintReadOnly, Category = MissionUI)
+		FText ObjectifText;
 public:
 	void DrawMissionToBP(ShimMission *mission);
 	

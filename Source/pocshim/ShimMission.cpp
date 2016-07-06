@@ -17,3 +17,7 @@ Detruisez le";
 ShimMission::~ShimMission()
 {
 }
+
+FString ShimMission::getObjectifText() {
+	return objectif->getObjectif();
+}

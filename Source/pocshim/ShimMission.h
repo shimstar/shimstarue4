@@ -16,6 +16,7 @@ public:
 	FString getName() { return name; };
 	FString getText() { return text; };
 	int getStatus() { return status; };
+	FString getObjectifText();
 	ShimMission();
 	~ShimMission();
 };
