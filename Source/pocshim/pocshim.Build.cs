@@ -6,7 +6,7 @@ public class pocshim : ModuleRules
 {
 	public pocshim(TargetInfo Target)
 	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Networking", "Sockets","Json" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "Networking", "Sockets","Json", "UMG", "Slate", "SlateCore" });
 		//PublicDependencyModuleNames.Add("Blu");
 
 		//PrivateDependencyModuleNames.AddRange(new string[]{});

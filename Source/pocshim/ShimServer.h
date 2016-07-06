@@ -10,8 +10,6 @@
 #include <string>
 #include <vector>
 
-DECLARE_LOG_CATEGORY_EXTERN(ShimLog, Verbose, All);
-
 /**
  * 
  */

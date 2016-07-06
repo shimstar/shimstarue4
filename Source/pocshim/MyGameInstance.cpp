@@ -12,18 +12,46 @@ void UMyGameInstance::loginShimstar(FString login, FString password) {
 
 int32 UMyGameInstance::statusLogin() {
 	int32 returnStatus = -1;
-	UE_LOG(ShimLog, Warning, TEXT("TOTO2"));
 	UShimServer * instance = UShimServer::getInstance();
 	if (instance) {
 		MessageServer *message = instance->getMessage("1");
-		UE_LOG(ShimLog, Warning, TEXT("TOTO"));
 		if (message) {
-			UE_LOG(ShimLog, Warning, TEXT("TTTT %d"), FCString::Atoi(*message->getValue("status")));
 			returnStatus = FCString::Atoi(*message->getValue("status"));
+			if (returnStatus == 1) {
+				//currentPlayer = new UShimUPlayerClass();
+				//currentPlayer = CreateDefaultSubobject<UShimUPlayerClass>(TEXT("currentPlayer"));
+				mission = new ShimMission;
+			}
 		}
 	}
 
 	return returnStatus;
+}
+
+FString UMyGameInstance::getMissionName() {
+	FString resultName = "";
+	if (mission) {
+		resultName = mission->getName();
+	}
+	return resultName;
+}
+
+FString UMyGameInstance::getObjectifName() {
+	FString resultName = "";
+
+	return resultName;
+}
+
+int UMyGameInstance::getStatus() {
+	int resultStatus = 0;
+
+	return resultStatus;
+}
+
+FString UMyGameInstance::getResult() {
+	FString returnResult = "";
+
+	return returnResult;
 }
 
 bool UMyGameInstance::isConnected() {
