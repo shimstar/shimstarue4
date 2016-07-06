@@ -14,6 +14,7 @@ class POCSHIM_API ShimMission
 	ShimObjectif *objectif;
 public:
 	FString getName() { return name; };
+	FString getText() { return text; };
 	int getStatus() { return status; };
 	ShimMission();
 	~ShimMission();

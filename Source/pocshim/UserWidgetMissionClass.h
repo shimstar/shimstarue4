@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Blueprint/UserWidget.h"
+#include "ShimMission.h"
 #include "UserWidgetMissionClass.generated.h"
 
 /**
@@ -13,13 +14,17 @@ class POCSHIM_API UUserWidgetMissionClass : public UUserWidget
 {
 	GENERATED_BODY()
 protected:
-	UFUNCTION(BlueprintImplementableEvent, Category = UI)
+	UFUNCTION(BlueprintImplementableEvent, Category = MissionUI)
 		void DrawMission();
-	UPROPERTY(BlueprintReadOnly)
+	UFUNCTION(BlueprintImplementableEvent, Category = MissionUI)
+		void DrawMissionText();
+	UPROPERTY(BlueprintReadOnly, Category = MissionUI)
 		FText MissionName;
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(BlueprintReadOnly, Category = MissionUI)
 		int MissionStatus;
+	UPROPERTY(BlueprintReadOnly, Category = MissionUI)
+		FText MissionText;
 public:
-	void DrawMissionToBP(FString MissionName, int MissionStatus);
+	void DrawMissionToBP(ShimMission *mission);
 	
 };

@@ -25,7 +25,8 @@ void AShimPlayerController::BeginPlay() {
 			widgetMission = CreateWidget<UUserWidgetMissionClass>(this, missionWidgetBP);
 			widgetMission->AddToViewport();
 			ShimPlayer *currentPlayer = ShimPlayer::getInstance();
-			widgetMission->DrawMissionToBP(currentPlayer->getMission()->getName(), currentPlayer->getMission()->getStatus());
+			widgetMission->DrawMissionToBP(currentPlayer->getMission());
+			
 		}
 	}
 }
