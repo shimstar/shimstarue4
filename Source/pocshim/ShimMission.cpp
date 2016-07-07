@@ -14,6 +14,11 @@ Detruisez le";
 	objectif = new ShimObjectif();
 }
 
+void ShimMission::updateObjectif(int ship) {
+	objectif->UpdateObjectif(ship);
+	status = objectif->getStatus();
+}
+
 ShimMission::~ShimMission()
 {
 }

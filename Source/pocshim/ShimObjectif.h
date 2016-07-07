@@ -16,6 +16,8 @@ private:
 	int status;
 public:
 	FString getObjectif();
+	void UpdateObjectif(int ship);
+	int getStatus() { return status; };
 	ShimObjectif();
 	~ShimObjectif();
 };

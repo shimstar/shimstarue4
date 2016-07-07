@@ -7,6 +7,8 @@
 DEFINE_LOG_CATEGORY(ShimLog);
 UShimServer::UShimServer()
 {
+	connected = false;
+	ConnectionSocket = nullptr;
 }
 
 UShimServer::~UShimServer()
@@ -50,7 +52,7 @@ bool UShimServer::connect() {
 	ConnectionSocket->SetReceiveBufferSize(ReceiveBufferSize, NewSize);
 
 	this->connected = connected;
-
+	
 	return connected;
 }
 
@@ -72,42 +74,43 @@ void UShimServer::sendMsg(FString val) {
 
 void UShimServer::getMessages() {
 	TArray<uint8> ReceivedData;
-	
-	uint32 Size;
-	while (ConnectionSocket->HasPendingData(Size))
-	{
-		ReceivedData.Init(FMath::Min(Size, 65507u),64);
-
-		int32 Read = 0;
-		ConnectionSocket->Recv(ReceivedData.GetData(), ReceivedData.Num(), Read);
-
-		//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Data Read! %d"), ReceivedData.Num()));
-	}
-	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-	if (ReceivedData.Num() <= 0)
-	{
-		//	UE_LOG(ShimLog, Warning, TEXT("POGGGGGGGGGGGGG NO DATA RECEIVED"));
-
-	}
-	else {
-		const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
-
-		int posLast = -1;
-		ReceivedUE4String.FindLastChar('}', posLast);
-		int len = ReceivedUE4String.Len();
-		FString tempReceived = ReceivedUE4String.Mid(0, posLast+1);
-
-		TSharedPtr<FJsonObject> JsonParsed;
-
-		TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(tempReceived);
-
-		if (FJsonSerializer::Deserialize(JsonReader, JsonParsed))
+	if (connected) {
+		uint32 Size;
+		while (ConnectionSocket->HasPendingData(Size))
 		{
-			MessageServer *temp = new MessageServer();
-			temp->setObj(JsonParsed);
-			listOfMessage.push_back(temp);
-			int ss = listOfMessage.size();
+			ReceivedData.Init(FMath::Min(Size, 65507u), 64);
+
+			int32 Read = 0;
+			ConnectionSocket->Recv(ReceivedData.GetData(), ReceivedData.Num(), Read);
+
+			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Data Read! %d"), ReceivedData.Num()));
+		}
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+		if (ReceivedData.Num() <= 0)
+		{
+			//	UE_LOG(ShimLog, Warning, TEXT("POGGGGGGGGGGGGG NO DATA RECEIVED"));
+
+		}
+		else {
+			const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
+
+			int posLast = -1;
+			ReceivedUE4String.FindLastChar('}', posLast);
+			int len = ReceivedUE4String.Len();
+			FString tempReceived = ReceivedUE4String.Mid(0, posLast + 1);
+
+			TSharedPtr<FJsonObject> JsonParsed;
+
+			TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(tempReceived);
+
+			if (FJsonSerializer::Deserialize(JsonReader, JsonParsed))
+			{
+				MessageServer *temp = new MessageServer();
+				temp->setObj(JsonParsed);
+				listOfMessage.push_back(temp);
+				int ss = listOfMessage.size();
+			}
 		}
 	}
 }

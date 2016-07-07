@@ -17,6 +17,7 @@ public:
 	FString getText() { return text; };
 	int getStatus() { return status; };
 	FString getObjectifText();
+	void updateObjectif(int ship);
 	ShimMission();
 	~ShimMission();
 };

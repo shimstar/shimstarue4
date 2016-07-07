@@ -14,13 +14,19 @@ int32 UMyGameInstance::statusLogin() {
 	int32 returnStatus = -1;
 	UShimServer * instance = UShimServer::getInstance();
 	if (instance) {
-		MessageServer *message = instance->getMessage("1");
-		if (message) {
-			returnStatus = FCString::Atoi(*message->getValue("status"));
-			if (returnStatus == 1) {
-				//currentPlayer = new UShimUPlayerClass();
-				//currentPlayer = CreateDefaultSubobject<UShimUPlayerClass>(TEXT("currentPlayer"));
-				mission = new ShimMission;
+		bool connected = instance->isConnected();
+		if (!connected) {
+			connected = instance->connect();
+		}
+		if (connected) {
+			MessageServer *message = instance->getMessage("1");
+			if (message) {
+				returnStatus = FCString::Atoi(*message->getValue("status"));
+				if (returnStatus == 1) {
+					//currentPlayer = new UShimUPlayerClass();
+					//currentPlayer = CreateDefaultSubobject<UShimUPlayerClass>(TEXT("currentPlayer"));
+					mission = new ShimMission;
+				}
 			}
 		}
 	}
@@ -65,18 +71,22 @@ bool UMyGameInstance::isConnected() {
 }
 
 void UMyGameInstance::initialize() {
-	UShimServer * instance = UShimServer::getInstance();
-	if (instance) {
-		bool connected = instance->connect();
-		if (connected) {
-			//Thread = FRunnableThread::Create(instance, TEXT("FPrimeNumberWorker"),  0, TPri_BelowNormal);
+//	if(this->HasAuthority() == false){
+		UShimServer * instance = UShimServer::getInstance();
+		if (instance) {
+			bool connected = instance->isConnected();
+			if (!connected) {
+				connected = instance->connect();
+				//Thread = FRunnableThread::Create(instance, TEXT("FPrimeNumberWorker"),  0, TPri_BelowNormal);
+			}
 		}
-	}
+	//}
 }
 
 void UMyGameInstance::callServer() {
 	UShimServer * instance = UShimServer::getInstance();
 	if (instance) {
+
 		if (instance->isConnected()) {
 			instance->getMessages();
 		}

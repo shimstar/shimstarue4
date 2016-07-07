@@ -13,6 +13,13 @@ ShimObjectif::ShimObjectif()
 	typeObjectif = 1;
 }
 
+void ShimObjectif::UpdateObjectif(int ship) {
+	actualNbShip += ship;
+	if (actualNbShip >= nbShip) {
+		status = 1;
+	}
+}
+
 FString ShimObjectif::getObjectif() {
 	FString result = name + " : " + FString::FromInt(actualNbShip) + " / "  + FString::FromInt(nbShip);
 	return result;
