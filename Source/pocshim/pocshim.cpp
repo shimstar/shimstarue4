@@ -3,3 +3,5 @@
 #include "pocshim.h"
 
 IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, pocshim, "pocshim" );
+
+DEFINE_LOG_CATEGORY(ShimLog);

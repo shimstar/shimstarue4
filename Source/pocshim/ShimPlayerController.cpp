@@ -30,3 +30,14 @@ void AShimPlayerController::BeginPlay() {
 		}
 	}
 }
+
+void AShimPlayerController::updateMission() {
+	if (this->HasAuthority() == false) {
+		ShimPlayer *currentPlayer = ShimPlayer::getInstance();
+		UE_LOG(ShimLog, Warning, TEXT("UPDATE MISSION?"));
+		currentPlayer->updateMission();
+		if (missionWidgetBP) {
+			widgetMission->DrawMissionToBP(currentPlayer->getMission());
+		}
+	}
+}

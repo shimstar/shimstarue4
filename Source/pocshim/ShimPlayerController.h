@@ -22,4 +22,6 @@ private:
 public:
 		virtual void Possess(APawn* InPawn) override;
 		virtual void BeginPlay() override;
+		UFUNCTION(BlueprintCallable, Category = "ShimPlayerController")
+		void updateMission();
 };

@@ -4,7 +4,7 @@
 #include "ShimServer.h"
 
 
-DEFINE_LOG_CATEGORY(ShimLog);
+
 UShimServer::UShimServer()
 {
 	connected = false;
@@ -74,6 +74,7 @@ void UShimServer::sendMsg(FString val) {
 
 void UShimServer::getMessages() {
 	TArray<uint8> ReceivedData;
+	;
 	if (connected) {
 		uint32 Size;
 		while (ConnectionSocket->HasPendingData(Size))
@@ -105,7 +106,7 @@ void UShimServer::getMessages() {
 			TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(tempReceived);
 
 			if (FJsonSerializer::Deserialize(JsonReader, JsonParsed))
-			{
+			{	
 				MessageServer *temp = new MessageServer();
 				temp->setObj(JsonParsed);
 				listOfMessage.push_back(temp);
@@ -114,60 +115,6 @@ void UShimServer::getMessages() {
 		}
 	}
 }
-/*
-uint32 UShimServer::Run() {
-
-	
-	while(1){
-		TArray<uint8> ReceivedData;
-
-		uint32 Size;
-		while (ConnectionSocket->HasPendingData(Size))
-		{
-			ReceivedData.Init(FMath::Min(Size, 65507u),64);
-
-			int32 Read = 0;
-			ConnectionSocket->Recv(ReceivedData.GetData(), ReceivedData.Num(), Read);
-
-			//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("Data Read! %d"), ReceivedData.Num()));
-		}
-		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-		if (ReceivedData.Num() <= 0)
-		{
-		//	UE_LOG(ShimLog, Warning, TEXT("POGGGGGGGGGGGGG NO DATA RECEIVED"));
-			
-		}else{
-			//UE_LOG(ShimLog, Warning, TEXT("PPPPPP DATA RECEIVED %d"), ReceivedData.Num());
-			const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
-			UE_LOG(ShimLog, Warning, TEXT("PPPP %s"),*ReceivedUE4String);
-			//if (ReceivedUE4String.Contains("Welcome")) {
-			//	sendMsg(TEXT("{\"code\":\"1\",\"login\":\"shimrod\",\"password\":\"shimrod\"}"));
-			//}
-			//else {
-				TSharedPtr<FJsonObject> JsonParsed;
-
-				TSharedRef<TJsonReader<TCHAR>> JsonReader = TJsonReaderFactory<TCHAR>::Create(ReceivedUE4String);
-
-				if (FJsonSerializer::Deserialize(JsonReader, JsonParsed))
-				{
-					MessageServer *temp = new MessageServer();
-					temp->setObj(JsonParsed);
-					listOfMessage.push_back(temp);
-
-				}
-			//}
-
-
-		}
-	}
-	return 0;
-}
-*/
-/*
-void UShimServer::Stop() {
-
-}*/
 
 
 

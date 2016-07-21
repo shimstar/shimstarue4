@@ -20,6 +20,7 @@ private:
 	ShimMission *mission;
 
 public:
+
 		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
 		bool ClientTravelToServer(FString ip);
 		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
@@ -42,5 +43,7 @@ public:
 			int getStatus();
 		UFUNCTION(BlueprintCallable, Category = "Mission")
 			FString getResult();
+		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = MyGameInstance)
+			FString ip;
 };
 

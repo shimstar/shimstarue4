@@ -16,4 +16,5 @@ private:
 public:
 	static ShimPlayer *getInstance();
 	ShimMission *getMission();
+	void updateMission();
 };

@@ -33,6 +33,10 @@ ShimPlayer::ShimPlayer()
 	mission = new ShimMission();
 }
 
+void ShimPlayer::updateMission() {
+	mission->updateObjectif(1);
+}
+
 ShimPlayer::~ShimPlayer()
 {
 }
