@@ -25,7 +25,7 @@ int32 UMyGameInstance::statusLogin() {
 				if (returnStatus == 1) {
 					//currentPlayer = new UShimUPlayerClass();
 					//currentPlayer = CreateDefaultSubobject<UShimUPlayerClass>(TEXT("currentPlayer"));
-					mission = new ShimMission;
+					//mission = new ShimMission;
 				}
 			}
 		}

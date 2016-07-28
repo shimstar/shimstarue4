@@ -30,11 +30,13 @@ ShimPlayer::ShimPlayer()
 		UE_LOG(ShimLog, Warning, TEXT("JSON KO"));
 	}
 	*/
-	mission = new ShimMission();
+	//mission = new ShimMission();
+	mission = NULL;
 }
 
 void ShimPlayer::updateMission() {
-	mission->updateObjectif(1);
+	if (mission)
+		mission->updateObjectif(1);
 }
 
 ShimPlayer::~ShimPlayer()

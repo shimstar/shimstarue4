@@ -5,12 +5,14 @@
 
 
 void UUserWidgetMissionClass::DrawMissionToBP(ShimMission *mission) {
-	UE_LOG(ShimLog, Warning, TEXT("DRAW MISSION BP?"));
-	MissionName = FText::FromString(mission->getName());
-	MissionStatus = mission->getStatus();
-	MissionText = FText::FromString(mission->getText());
-	ObjectifText = FText::FromString(mission->getObjectifText());
-	this->DrawMission();
-	this->DrawMissionText();
+	if(mission){
+		UE_LOG(ShimLog, Warning, TEXT("DRAW MISSION BP?"));
+		MissionName = FText::FromString(mission->getName());
+		MissionStatus = mission->getStatus();
+		MissionText = FText::FromString(mission->getText());
+		ObjectifText = FText::FromString(mission->getObjectifText());
+		this->DrawMission();
+		this->DrawMissionText();
+	}
 }
 

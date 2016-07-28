@@ -23,9 +23,13 @@ void AShimPlayerController::BeginPlay() {
 	if (this->HasAuthority() == false) {
 		if (missionWidgetBP) {
 			widgetMission = CreateWidget<UUserWidgetMissionClass>(this, missionWidgetBP);
-			widgetMission->AddToViewport();
+			
 			ShimPlayer *currentPlayer = ShimPlayer::getInstance();
-			widgetMission->DrawMissionToBP(currentPlayer->getMission());
+			if(currentPlayer->getMission()){
+				widgetMission->AddToViewport();
+				widgetMission->DrawMissionToBP(currentPlayer->getMission());
+			}
+			
 			
 		}
 	}
@@ -34,10 +38,20 @@ void AShimPlayerController::BeginPlay() {
 void AShimPlayerController::updateMission() {
 	if (this->HasAuthority() == false) {
 		ShimPlayer *currentPlayer = ShimPlayer::getInstance();
-		UE_LOG(ShimLog, Warning, TEXT("UPDATE MISSION?"));
+		
 		currentPlayer->updateMission();
-		if (missionWidgetBP) {
-			widgetMission->DrawMissionToBP(currentPlayer->getMission());
+		if (currentPlayer->getMission()) {
+			if (missionWidgetBP) {
+				if (!widgetMission->IsInViewport()) {
+					widgetMission->AddToViewport();
+				}
+				widgetMission->DrawMissionToBP(currentPlayer->getMission());
+			}
+		}
+		else {
+			if (widgetMission->IsInViewport()) {
+				widgetMission->RemoveFromViewport();
+			}
 		}
 	}
 }

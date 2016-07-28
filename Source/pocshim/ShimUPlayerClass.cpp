@@ -4,7 +4,7 @@
 #include "ShimUPlayerClass.h"
 
 UShimUPlayerClass::UShimUPlayerClass() {
-	mission = new ShimMission();
+//	mission = new ShimMission();
 }
 
 
