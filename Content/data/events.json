@@ -1,0 +1,23 @@
+{
+  "zones" :[
+    {
+      "id" : 1,
+      "events":[
+        {
+          "id" : 1,
+          "name" : "petitpirate",
+          "relatedmission" : 1,
+          "possibility" : 80,
+          "reproduceEvenMissionFinished" : false,
+          "spawn" : {
+            "ship" : "darkfighter",
+            "spawnX" : 5000,
+            "spawnY" : 5000,
+            "spawnZ" : 5000,
+            "nbship" : 1
+          }
+        }
+      ]
+    }
+  ]
+}

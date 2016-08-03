@@ -14,17 +14,17 @@ class POCSHIM_API UUserWidgetMissionClass : public UUserWidget
 {
 	GENERATED_BODY()
 protected:
-	UFUNCTION(BlueprintImplementableEvent, Category = MissionUI)
+	UFUNCTION(BlueprintImplementableEvent, Category = "Shimstar|MissionUI")
 		void DrawMission();
-	UFUNCTION(BlueprintImplementableEvent, Category = MissionUI)
+	UFUNCTION(BlueprintImplementableEvent, Category = "Shimstar|MissionUI")
 		void DrawMissionText();
-	UPROPERTY(BlueprintReadOnly, Category = MissionUI)
+	UPROPERTY(BlueprintReadOnly, Category = "Shimstar|MissionUI")
 		FText MissionName;
-	UPROPERTY(BlueprintReadOnly, Category = MissionUI)
+	UPROPERTY(BlueprintReadOnly, Category = "Shimstar|MissionUI")
 		int MissionStatus;
-	UPROPERTY(BlueprintReadOnly, Category = MissionUI)
+	UPROPERTY(BlueprintReadOnly, Category = "Shimstar|MissionUI")
 		FText MissionText;
-	UPROPERTY(BlueprintReadOnly, Category = MissionUI)
+	UPROPERTY(BlueprintReadOnly, Category = "Shimstar|MissionUI")
 		FText ObjectifText;
 public:
 	void DrawMissionToBP(ShimMission *mission);

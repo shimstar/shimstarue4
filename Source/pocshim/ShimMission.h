@@ -20,4 +20,5 @@ public:
 	void updateObjectif(int ship);
 	ShimMission();
 	~ShimMission();
+
 };

@@ -1,0 +1,51 @@
+{
+	"missions":[
+		{
+			"id" : 1,
+			"name":"Destroy Petit Pirate",
+			"type" : "destroy",
+			"npc":{
+				"name" : "lise",
+				"face" : "face3"
+			},
+			"text" : {
+				"new" : "Un pirate s'amuse dans la zone\n S'il vous plait, arretez le!!\n Detruisez le",
+				"inprogress" : "ipsem lorem",
+				"finish" : "Felicitations"
+			},
+			"objectif":{
+				"id":"1",
+				"name":"petit pirate",
+				"typeObjectif" : 1,
+				"custom" : {
+					"nbShip":"1"
+				}
+			}
+		},
+		{
+			"id" : 2,
+			"name":"Destroy 2 Pirates",
+			"type" : "destroy",
+			"npc":{
+				"name" : "lise",
+				"face" : "face3"
+			},
+			"text" : {
+				"new" : "Voila du renfort\n Arretez les!!!",
+				"inprogress" : "ipsem lorem",
+				"finish" : "Felicitations"
+			},
+			"objectif":{
+				"id":"1",
+				"name":"Pirates",
+				"typeObjectif" : 1,
+				"custom" : {
+					"nbShip":"2"
+				}
+			},
+			"prerequisite" : {
+				"mission" : [1]
+			}
+		}
+	]
+}

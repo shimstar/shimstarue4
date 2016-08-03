@@ -3,6 +3,8 @@
 #include "pocshim.h"
 #include "pocshimGameMode.h"
 
-
+void ApocshimGameMode::BeginPlay() {
+	ShimEventsTemplate::loadEvents();
+}
 
 
