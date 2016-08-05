@@ -61,6 +61,26 @@ void AShimStation::Tick( float DeltaTime )
 
 }
 
+void AShimStation::ShowMission(int idMission) {
+	AShimPlayerControllerMenu *Pcontrol = NULL;
+	for (FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator)
+	{
+		Pcontrol = Cast<AShimPlayerControllerMenu>(*Iterator);
+		break;
+	}
+	ShimMissionTemplate *mission = NULL;
+	for (int i = 0; i < listOfMissions.size(); i++) {
+		if (listOfMissions[i]->getId() == idMission) {
+			mission = listOfMissions[i];
+			break;
+		}
+	}
+
+	if (Pcontrol && mission) {
+		Pcontrol->showMission(mission);
+	}
+}
+
 void AShimStation::ShowListMissions() {
 	AShimPlayerControllerMenu *Pcontrol = NULL;
 	for (FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator)
@@ -69,28 +89,6 @@ void AShimStation::ShowListMissions() {
 		break;
 	}
 	if (Pcontrol) {
-		UE_LOG(ShimLog, Warning, TEXT("Show List Missions"));
 		Pcontrol->showListOfMission(listOfMissions);
 	}
-	/*UE_LOG(ShimLog, Warning, TEXT("Show List Missions"));
-	for (int i = 0; i < listOfMissions.size(); i++) {
-		UE_LOG(ShimLog, Warning, TEXT("Show List Missions 2"));
-		if (stationWidgetBP) {
-			UE_LOG(ShimLog, Warning, TEXT("Show List Missions 3"));
-			APlayerController *Pcontrol = NULL;
-			for (FConstPlayerControllerIterator Iterator = GetWorld()->GetPlayerControllerIterator(); Iterator; ++Iterator)
-			{
-				Pcontrol = *Iterator;
-				break;
-			}
-			UE_LOG(ShimLog, Warning, TEXT("Show List Missions 4"));
-			if (Pcontrol) {
-				UE_LOG(ShimLog, Warning, TEXT("Show List Missions 5"));
-				UStationWidgetClass *widgetMission = NULL;
-				widgetMission = CreateWidget<UStationWidgetClass>(Pcontrol, stationWidgetBP);
-				widgetMission->AddToViewport();
-			}
-			
-		}
-	}*/
 }

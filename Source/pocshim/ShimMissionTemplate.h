@@ -14,11 +14,16 @@ private:
 	FString faceNpc;
 	FString type;
 	FString location;
+	FString newText;
 public:
 	void init(TSharedPtr<FJsonObject>);
 	ShimMissionTemplate();
 	~ShimMissionTemplate();
 	FString getfaceNpc() { return faceNpc; };
+	FString getNameNpc() { return nameNpc; };
 	FString getLocation() { return location; };
 	FString getName() { return name; };
+	FString getNewText() { return newText; };
+	int getId() { return id; };
 };
+

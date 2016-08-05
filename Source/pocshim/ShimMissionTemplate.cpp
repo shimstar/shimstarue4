@@ -11,6 +11,8 @@ void ShimMissionTemplate::init(TSharedPtr<FJsonObject> missionJs) {
 	TSharedPtr<FJsonObject> npc = missionJs->GetObjectField("npc");
 	nameNpc = npc->GetStringField("name");
 	faceNpc = npc->GetStringField("face");
+	TSharedPtr<FJsonObject> dialogs = missionJs->GetObjectField("text");
+	newText = dialogs->GetStringField("new");
 }
 
 

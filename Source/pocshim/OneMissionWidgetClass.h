@@ -3,26 +3,27 @@
 #pragma once
 
 #include "Blueprint/UserWidget.h"
-#include "tinymissionwidgetclass.generated.h"
+#include "OneMissionWidgetClass.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class POCSHIM_API Utinymissionwidgetclass : public UUserWidget
+class POCSHIM_API UOneMissionWidgetClass : public UUserWidget
 {
 	GENERATED_BODY()
 	
+	
 public:
-	UPROPERTY(Category = "Shimstar|StationUI", EditAnywhere, BlueprintReadWrite) 
+	UPROPERTY(Category = "Shimstar|StationUI", EditAnywhere, BlueprintReadWrite)
 		FString faceValue;
+	UPROPERTY(Category = "Shimstar|StationUI", EditAnywhere, BlueprintReadWrite)
+		FString faceNameValue;
 	UPROPERTY(Category = "Shimstar|StationUI", EditAnywhere, BlueprintReadWrite)
 		FString summary;
 	UPROPERTY(Category = "Shimstar|StationUI", EditAnywhere, BlueprintReadWrite)
-		FString location;
+		FString text;
 	UPROPERTY(Category = "Shimstar|StationUI", EditAnywhere, BlueprintReadWrite)
-		int id;
-	
-	
+		FString objectifs;
 	
 };

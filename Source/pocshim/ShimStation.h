@@ -3,9 +3,9 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include "OneMissionWidgetClass.h"
 #include "ShimMissionTemplate.h"
 #include "ShimPlayerControllerMenu.h"
-#include "StationWidgetClass.h"
 #include "GameFramework/Actor.h"
 #include "ShimStation.generated.h"
 
@@ -27,6 +27,8 @@ public:
 	AShimStation();
 	UFUNCTION(BlueprintCallable, Category = "Shimstar|StationUI")
 		void ShowListMissions();
+	UFUNCTION(BlueprintCallable, Category = "Shimstar|StationUI")
+		void ShowMission(int idMission);
 		
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
