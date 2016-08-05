@@ -13,9 +13,12 @@ private:
 	FString nameNpc;
 	FString faceNpc;
 	FString type;
+	FString location;
 public:
 	void init(TSharedPtr<FJsonObject>);
 	ShimMissionTemplate();
 	~ShimMissionTemplate();
 	FString getfaceNpc() { return faceNpc; };
+	FString getLocation() { return location; };
+	FString getName() { return name; };
 };

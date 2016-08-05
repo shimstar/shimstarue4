@@ -16,11 +16,13 @@ class POCSHIM_API AShimPlayerControllerMenu : public APlayerController
 {
 	GENERATED_BODY()
 private:
-	Utinymissionwidgetclass *stationMissionWidget;
 	UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<Utinymissionwidgetclass> stationMissionWidgetBP;
 public:
 	void showListOfMission(std::vector<ShimMissionTemplate *>);
+
+	UFUNCTION(BlueprintCallable, Category = "Shimstar|StationUI")
+		void ShowMission();
 
 	
 };

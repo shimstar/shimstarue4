@@ -9,14 +9,21 @@
 void AShimPlayerControllerMenu::showListOfMission(std::vector<ShimMissionTemplate *> stationMissions) {
 	for (int i = 0; i < stationMissions.size(); i++) {
 		if (stationMissionWidgetBP) {
-			stationMissionWidget = CreateWidget<Utinymissionwidgetclass>(this, stationMissionWidgetBP);
+			Utinymissionwidgetclass *stationMissionWidget = CreateWidget<Utinymissionwidgetclass>(this, stationMissionWidgetBP);
 			stationMissionWidget->SetPositionInViewport(FVector2D(300, 70 + 120*i));
 			stationMissionWidget->faceValue = stationMissions[i]->getfaceNpc();
+			stationMissionWidget->location = stationMissions[i]->getLocation();
+			stationMissionWidget->summary = stationMissions[i]->getName();
 			stationMissionWidget->AddToViewport();
-
+			
 		}
 		else {
 			GEngine->AddOnScreenDebugMessage(-1, -1, FColor::Red, TEXT("template nukl"));
 		}
 	}
+}
+
+void AShimPlayerControllerMenu::ShowMission() {
+
+
 }

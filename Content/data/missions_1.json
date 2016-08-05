@@ -4,6 +4,7 @@
 			"id" : 1,
 			"name":"Destroy Petit Pirate",
 			"type" : "destroy",
+			"location" : "zone1",
 			"npc":{
 				"name" : "lise",
 				"face" : "face3"
@@ -25,9 +26,10 @@
 		{
 			"id" : 2,
 			"name":"Destroy 2 Pirates",
+			"location" : "zone1",
 			"type" : "destroy",
 			"npc":{
-				"name" : "John",
+				"name" : "john",
 				"face" : "face1"
 			},
 			"text" : {

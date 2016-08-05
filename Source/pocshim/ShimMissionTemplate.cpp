@@ -7,6 +7,7 @@ void ShimMissionTemplate::init(TSharedPtr<FJsonObject> missionJs) {
 	id = missionJs->GetIntegerField("id");
 	name = missionJs->GetStringField("name");
 	type = missionJs->GetStringField("type");
+	location = missionJs->GetStringField("location");
 	TSharedPtr<FJsonObject> npc = missionJs->GetObjectField("npc");
 	nameNpc = npc->GetStringField("name");
 	faceNpc = npc->GetStringField("face");

@@ -14,8 +14,12 @@ class POCSHIM_API Utinymissionwidgetclass : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-	UPROPERTY(Category = "shimstar|station", EditAnywhere, BlueprintReadWrite) 
+	UPROPERTY(Category = "Shimstar|StationUI", EditAnywhere, BlueprintReadWrite) 
 		FString faceValue;
+	UPROPERTY(Category = "Shimstar|StationUI", EditAnywhere, BlueprintReadWrite)
+		FString summary;
+	UPROPERTY(Category = "Shimstar|StationUI", EditAnywhere, BlueprintReadWrite)
+		FString location;
 	
 	
 	
