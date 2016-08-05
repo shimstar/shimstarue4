@@ -27,8 +27,8 @@
 			"name":"Destroy 2 Pirates",
 			"type" : "destroy",
 			"npc":{
-				"name" : "lise",
-				"face" : "face3"
+				"name" : "John",
+				"face" : "face1"
 			},
 			"text" : {
 				"new" : "Voila du renfort\n Arretez les!!!",

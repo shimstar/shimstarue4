@@ -6,7 +6,6 @@
 
 void UUserWidgetMissionClass::DrawMissionToBP(ShimMission *mission) {
 	if(mission){
-		UE_LOG(ShimLog, Warning, TEXT("DRAW MISSION BP?"));
 		MissionName = FText::FromString(mission->getName());
 		MissionStatus = mission->getStatus();
 		MissionText = FText::FromString(mission->getText());

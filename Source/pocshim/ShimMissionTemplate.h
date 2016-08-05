@@ -17,4 +17,5 @@ public:
 	void init(TSharedPtr<FJsonObject>);
 	ShimMissionTemplate();
 	~ShimMissionTemplate();
+	FString getfaceNpc() { return faceNpc; };
 };

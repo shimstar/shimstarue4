@@ -38,7 +38,7 @@ void AShimPlayerController::BeginPlay() {
 void AShimPlayerController::updateMission() {
 	if (this->HasAuthority() == false) {
 		ShimPlayer *currentPlayer = ShimPlayer::getInstance();
-		
+
 		currentPlayer->updateMission();
 		if (currentPlayer->getMission()) {
 			if (missionWidgetBP) {
