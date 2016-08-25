@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+#include <vector>
 /**
  * 
  */
@@ -15,6 +15,8 @@ private:
 	FString type;
 	FString location;
 	FString newText;
+	static std::vector<ShimMissionTemplate *> listOfMissions;
+	static void addMissionTemplate(ShimMissionTemplate *);
 public:
 	void init(TSharedPtr<FJsonObject>);
 	ShimMissionTemplate();
@@ -25,5 +27,9 @@ public:
 	FString getName() { return name; };
 	FString getNewText() { return newText; };
 	int getId() { return id; };
+	static ShimMissionTemplate *getTemplateById(int);
+	static void loadMissions();
+	static std::vector<ShimMissionTemplate *> getListOfMissionTemplate();
+
 };
 

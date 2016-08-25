@@ -15,9 +15,6 @@ class POCSHIM_API AShimStation : public AActor
 	GENERATED_BODY()
 private:
 	int id;
-	std::vector<ShimMissionTemplate *> listOfMissions;
-	void loadMissions();
-	
 
 public:	
 	void loadStation(int);

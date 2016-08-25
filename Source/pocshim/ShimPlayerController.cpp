@@ -3,9 +3,6 @@
 #include "pocshim.h"
 #include "ShimPlayerController.h"
 
-
-
-
 void AShimPlayerController::Possess(APawn* InPawn)
 {
 	Super::Possess(InPawn);
@@ -55,3 +52,5 @@ void AShimPlayerController::updateMission() {
 		}
 	}
 }
+
+

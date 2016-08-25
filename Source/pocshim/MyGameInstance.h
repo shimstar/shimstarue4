@@ -3,6 +3,7 @@
 #pragma once
 
 #include "ShimServer.h"
+#include "ShimPlayer.h"
 #include "Engine/GameInstance.h"
 #include "ThreadingBase.h"
 #include "ShimMission.h"

@@ -23,9 +23,16 @@ int32 UMyGameInstance::statusLogin() {
 			if (message) {
 				returnStatus = FCString::Atoi(*message->getValue("status"));
 				if (returnStatus == 1) {
-					//currentPlayer = new UShimUPlayerClass();
-					//currentPlayer = CreateDefaultSubobject<UShimUPlayerClass>(TEXT("currentPlayer"));
-					//mission = new ShimMission;
+					ShimPlayer *currentPlayer = ShimPlayer::getInstance();
+					if (currentPlayer) {
+						TSharedPtr<FJsonObject> jsonObj = message->getObj();
+						TSharedPtr<FJsonObject> userJson = jsonObj->GetObjectField("userJson");
+						FString tempId = userJson->GetStringField("id");
+						currentPlayer->setId(tempId);
+						TArray <TSharedPtr<FJsonValue>> missionsJs = userJson->GetArrayField("missions");
+						currentPlayer->loadMissions(missionsJs);
+
+					}
 				}
 			}
 		}

@@ -21,3 +21,7 @@ FString MessageServer::getValue(FString key) {
 	}
 	return "";
 }
+
+TSharedPtr<FJsonObject> MessageServer::getObj() {
+	return JsonParsed;
+}

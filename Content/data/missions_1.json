@@ -2,7 +2,7 @@
 	"missions":[
 		{
 			"id" : 1,
-			"name":"Destroy Petit Pirate",
+			"name":"Detruire le pirate de la zone",
 			"type" : "destroy",
 			"location" : "zone1",
 			"npc":{
@@ -10,7 +10,7 @@
 				"face" : "face3"
 			},
 			"text" : {
-				"new" : "Un pirate s'amuse dans la zone\n S'il vous plait, arretez le!!\n Detruisez le",
+				"new" : "Un pirate s'amuse dans la zone, il detruit tout ce qui bouge\n\nS'il vous plait, arretez le!!\n\nDetruisez le, il nous fait pas mal de dêgats.",
 				"inprogress" : "ipsem lorem",
 				"finish" : "Felicitations"
 			},
@@ -25,7 +25,7 @@
 		},
 		{
 			"id" : 2,
-			"name":"Destroy 2 Pirates",
+			"name":"Detruire l'escadrille de pirates",
 			"location" : "zone1",
 			"type" : "destroy",
 			"npc":{

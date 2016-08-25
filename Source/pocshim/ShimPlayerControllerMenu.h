@@ -2,6 +2,8 @@
 
 #pragma once
 #include <vector>
+#include "shimserver.h"
+#include "ShimPlayer.h"
 #include "OneMissionWidgetClass.h"
 #include "tinymissionwidgetclass.h"
 #include "ShimMissionTemplate.h"
@@ -25,7 +27,7 @@ public:
 	void showListOfMission(std::vector<ShimMissionTemplate *>);
 	void showMission(ShimMissionTemplate *);
 
-	void ShowMission();
-
+	UFUNCTION(BlueprintCallable, Category = "Shimstar|StationUI")
+		void acceptMission(int32 idMission);
 	
 };

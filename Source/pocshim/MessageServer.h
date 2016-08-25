@@ -13,6 +13,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "MessageServer")
 	FString getValue(FString);
 	void setObj(TSharedPtr<FJsonObject>);
+	TSharedPtr<FJsonObject> getObj();
 
 private:
 	TSharedPtr<FJsonObject> JsonParsed;

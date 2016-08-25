@@ -79,7 +79,7 @@ void UShimServer::getMessages() {
 		uint32 Size;
 		while (ConnectionSocket->HasPendingData(Size))
 		{
-			ReceivedData.Init(FMath::Min(Size, 65507u), 64);
+			ReceivedData.Init(FMath::Min(Size, 65507u), 1024);
 
 			int32 Read = 0;
 			ConnectionSocket->Recv(ReceivedData.GetData(), ReceivedData.Num(), Read);
@@ -95,7 +95,7 @@ void UShimServer::getMessages() {
 		}
 		else {
 			const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
-
+			//UE_LOG(ShimLog, Warning, TEXT("POGGGGGGGGGGGGG %s"), *ReceivedUE4String);
 			int posLast = -1;
 			ReceivedUE4String.FindLastChar('}', posLast);
 			int len = ReceivedUE4String.Len();

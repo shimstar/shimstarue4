@@ -5,13 +5,14 @@
 
 ShimMission::ShimMission()
 {
-	id = 1;
-	name = "Destroy petit pirate";
-	text = "Un pirate s'amuse dans la zone\n\
-S'il vous plait, arretez le!!\n\
-Detruisez le";
-	status = 0;
-	objectif = new ShimObjectif();
+	missionTemplate = nullptr;
+}
+
+int ShimMission::getIdTemplate() {
+	if (missionTemplate) {
+		return missionTemplate->getId();
+	}
+	return 0;
 }
 
 void ShimMission::updateObjectif(int ship) {
@@ -25,4 +26,8 @@ ShimMission::~ShimMission()
 
 FString ShimMission::getObjectifText() {
 	return objectif->getObjectif();
+}
+
+void ShimMission::setTemplate(int idTemplate) {
+	missionTemplate = ShimMissionTemplate::getTemplateById(idTemplate);
 }

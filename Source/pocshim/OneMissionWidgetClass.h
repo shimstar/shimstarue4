@@ -25,5 +25,7 @@ public:
 		FString text;
 	UPROPERTY(Category = "Shimstar|StationUI", EditAnywhere, BlueprintReadWrite)
 		FString objectifs;
+	UPROPERTY(Category = "Shimstar|StationUI", EditAnywhere, BlueprintReadWrite)
+		int32 idMission;
 	
 };
