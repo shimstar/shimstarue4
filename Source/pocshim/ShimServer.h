@@ -24,7 +24,8 @@ public:
 	//virtual void Stop();
 	bool connect();
 	
-	MessageServer *getMessage(FString code);
+	MessageServer *getMessage(FString code,bool erase);
+	void eraseMessage(MessageServer *);
 	void getMessages();
 	bool isConnected();
 	

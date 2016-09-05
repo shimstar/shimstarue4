@@ -19,7 +19,7 @@ int32 UMyGameInstance::statusLogin() {
 			connected = instance->connect();
 		}
 		if (connected) {
-			MessageServer *message = instance->getMessage("1");
+			MessageServer *message = instance->getMessage("1",true);
 			if (message) {
 				returnStatus = FCString::Atoi(*message->getValue("status"));
 				if (returnStatus == 1) {
@@ -93,7 +93,6 @@ void UMyGameInstance::initialize() {
 void UMyGameInstance::callServer() {
 	UShimServer * instance = UShimServer::getInstance();
 	if (instance) {
-
 		if (instance->isConnected()) {
 			instance->getMessages();
 		}

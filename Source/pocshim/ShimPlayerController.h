@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "ShimServer.h"
 #include "GameFramework/PlayerController.h"
 #include "UserWidgetMissionClass.h"
 #include "ShimPlayer.h"
@@ -16,12 +17,17 @@ class POCSHIM_API AShimPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 private:
+	ShimPlayer *associatedPlayer;
 	UUserWidgetMissionClass *widgetMission;
 	UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<UUserWidgetMissionClass> missionWidgetBP;
 public:
 		virtual void Possess(APawn* InPawn) override;
 		virtual void BeginPlay() override;
-		UFUNCTION(BlueprintCallable, Category = "ShimPlayerController")
+		UFUNCTION(BlueprintCallable, Category = "Shimstar|ShimPlayerController")
 		void updateMission();
+		UFUNCTION(Server,Reliable, WithValidation)
+			void setIdPlayerToServer(const FString& id);
+		UFUNCTION(BlueprintCallable, Category = "Shimstar|ShimPlayerController")
+			void checkMessageServer();
 };

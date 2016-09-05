@@ -11,10 +11,11 @@ class POCSHIM_API ShimPlayer
 private:
 	FString id;
 	std::vector<ShimMission *> listOfMission;
+	static ShimPlayer *currentPlayer;
+	static std::vector<ShimPlayer *> listOfPlayer;
+public:
 	ShimPlayer();
 	~ShimPlayer();
-	static ShimPlayer *currentPlayer;
-public:
 	static ShimPlayer *getInstance();
 	ShimMission *getMission();
 	std::vector<ShimMission *> getListOfMission() { return listOfMission; };
@@ -22,5 +23,7 @@ public:
 	FString getId(); 
 	void setId(FString id);
 	void loadMissions(TArray <TSharedPtr<FJsonValue>>);
+
+	ShimPlayer* getPlayerById(FString id);
 
 };

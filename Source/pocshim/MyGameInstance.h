@@ -22,27 +22,27 @@ private:
 
 public:
 
-		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
+		UFUNCTION(BlueprintCallable, Category = "Shimstar|MyGameInstance")
 		bool ClientTravelToServer(FString ip);
-		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
+		UFUNCTION(BlueprintCallable, Category = "Shimstar|MyGameInstance")
 			void initialize();
 		FRunnableThread* Thread;
 
-		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
+		UFUNCTION(BlueprintCallable, Category = "Shimstar|MyGameInstance")
 			void loginShimstar(FString login, FString password);
-		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
+		UFUNCTION(BlueprintCallable, Category = "Shimstar|MyGameInstance")
 			int32 statusLogin();
-		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
+		UFUNCTION(BlueprintCallable, Category = "Shimstar|MyGameInstance")
 			void callServer();
-		UFUNCTION(BlueprintCallable, Category = "MyGameInstance")
+		UFUNCTION(BlueprintCallable, Category = "Shimstar|MyGameInstance")
 			bool isConnected();
-		UFUNCTION(BlueprintCallable, Category = "Mission")
+		UFUNCTION(BlueprintCallable, Category = "Shimstar|Mission")
 			FString getMissionName();
-		UFUNCTION(BlueprintCallable, Category = "Mission")
+		UFUNCTION(BlueprintCallable, Category = "Shimstar|Mission")
 			FString getObjectifName();
-		UFUNCTION(BlueprintCallable, Category = "Mission")
+		UFUNCTION(BlueprintCallable, Category = "Shimstar|Mission")
 			int getStatus();
-		UFUNCTION(BlueprintCallable, Category = "Mission")
+		UFUNCTION(BlueprintCallable, Category = "Shimstar|Mission")
 			FString getResult();
 		UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = MyGameInstance)
 			FString ip;

@@ -8,3 +8,14 @@ void ApocshimGameMode::BeginPlay() {
 }
 
 
+void ApocshimGameMode::callServer() {
+	UShimServer * instance = UShimServer::getInstance();
+	if (instance) {
+		bool connected = instance->isConnected();
+		if (!connected) {
+			connected = instance->connect();
+		}else{
+			instance->getMessages();
+		}
+	}
+}

@@ -5,6 +5,14 @@
 
 ShimPlayer::ShimPlayer()
 {
+	listOfPlayer.push_back(this);
+}
+
+ShimPlayer* ShimPlayer::getPlayerById(FString id) {
+	for (int i = 0; i < listOfPlayer.size(); i++) {
+		if (listOfPlayer[i]->getId() == id) return listOfPlayer[i];
+	}
+	return nullptr;
 }
 
 void ShimPlayer::updateMission() {
@@ -50,3 +58,4 @@ ShimPlayer* ShimPlayer::getInstance() {
 }
 
 ShimPlayer* ShimPlayer::currentPlayer = nullptr;
+std::vector<ShimPlayer *> ShimPlayer::listOfPlayer;

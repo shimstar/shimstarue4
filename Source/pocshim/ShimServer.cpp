@@ -15,10 +15,24 @@ UShimServer::~UShimServer()
 {
 }
 
-MessageServer *UShimServer::getMessage(FString code) {
+void UShimServer::eraseMessage(MessageServer *msg) {
+	int index = -1;
+	bool found = false;
+	for (int i = 0; i < listOfMessage.size(); i++) {
+		index = i;
+		if (listOfMessage[i] == msg) {
+			found = true;
+			break;
+		}
+	}
+
+	if(found) listOfMessage.erase(listOfMessage.begin() + index);
+
+}
+
+MessageServer *UShimServer::getMessage(FString code,bool erase) {
 	int index = -1;
 	MessageServer *returnValue = nullptr;
-	int ss = listOfMessage.size();
 	for (int i=0;i < listOfMessage.size();i++) {
 		FString val = listOfMessage[i]->getValue("code");
 		if (listOfMessage[i]->getValue("code") == code) {
@@ -27,8 +41,9 @@ MessageServer *UShimServer::getMessage(FString code) {
 			break;
 		}
 	}
+	
 	if (index != -1) {
-		listOfMessage.erase(listOfMessage.begin() + index);
+		if (erase) listOfMessage.erase(listOfMessage.begin() + index);
 	}
 	return returnValue;
 }
@@ -95,7 +110,7 @@ void UShimServer::getMessages() {
 		}
 		else {
 			const FString ReceivedUE4String = StringFromBinaryArray(ReceivedData);
-			//UE_LOG(ShimLog, Warning, TEXT("POGGGGGGGGGGGGG %s"), *ReceivedUE4String);
+//			UE_LOG(ShimLog, Warning, TEXT("POGGGGGGGGGGGGG %s"), *ReceivedUE4String);
 			int posLast = -1;
 			ReceivedUE4String.FindLastChar('}', posLast);
 			int len = ReceivedUE4String.Len();

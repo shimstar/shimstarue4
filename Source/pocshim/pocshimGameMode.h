@@ -2,6 +2,7 @@
 
 #pragma once
 #include "ShimEventsTemplate.h"
+#include "ShimServer.h"
 #include "GameFramework/GameMode.h"
 #include "pocshimGameMode.generated.h"
 
@@ -16,5 +17,8 @@ class POCSHIM_API ApocshimGameMode : public AGameMode
 	
 public:
 	virtual void BeginPlay() override;
+
+	UFUNCTION(BlueprintCallable, Category = "Shimstar|MyGameMode")
+		void callServer();
 	
 };
