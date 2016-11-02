@@ -5,18 +5,26 @@
 
 
 void ShimEventsTemplate::setInfos(TSharedPtr<FJsonObject> peventJs) {
-	name = peventJs->GetStringField("name");
-	id = peventJs->GetIntegerField("id");
-	relatedMission = peventJs->GetIntegerField("relatedmission");
-	possibility = peventJs->GetIntegerField("possibility");
-	reproduceEvenMissionFinished = peventJs->GetBoolField("reproduceEvenMissionFinished");
-	TSharedPtr<FJsonObject> spawnObject = peventJs->GetObjectField("spawn");
-	spawnArchetype = spawnObject->GetStringField("ship");
-	nbShip = spawnObject->GetIntegerField("nbship");
-	spawnX = spawnObject->GetIntegerField("spawnX");
-	spawnY = spawnObject->GetIntegerField("spawnY");
-	spawnZ = spawnObject->GetIntegerField("spawnZ");
+	//name = peventJs->GetStringField("name");
+	id = peventJs->GetStringField("id");
+	//relatedMission = peventJs->GetIntegerField("relatedmission");
+	//possibility = peventJs->GetIntegerField("possibility");
+	//reproduceEvenMissionFinished = peventJs->GetBoolField("reproduceEvenMissionFinished");
+	TSharedPtr<FJsonObject> locationObject = peventJs->GetObjectField("location");
+	spawnArchetype =  peventJs->GetStringField("typeship");
+	nbShip = peventJs->GetIntegerField("nb");
+	spawnX = locationObject->GetIntegerField("x");
+	spawnY = locationObject->GetIntegerField("y");
+	spawnZ = locationObject->GetIntegerField("z");
 
+}
+
+ShimEventsTemplate *ShimEventsTemplate::getTemplate(FString id) {
+	for (std::vector<ShimEventsTemplate *>::iterator it = listOfEvents.begin(); it < listOfEvents.end(); it++) {
+		ShimEventsTemplate *temp = *it;
+		if (temp->id == id) return temp;
+	}
+	return nullptr;
 }
 
 void ShimEventsTemplate::loadEvents() {

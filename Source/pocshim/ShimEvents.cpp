@@ -3,28 +3,21 @@
 #include "pocshim.h"
 #include "ShimEvents.h"
 
-
-// Sets default values
-AShimEvents::AShimEvents()
+ShimEvents::ShimEvents()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
-
+	nbShipSpawn = 0;
+	evtTemplate = nullptr;
 }
 
-
-
-// Called when the game starts or when spawned
-void AShimEvents::BeginPlay()
+ShimEvents::~ShimEvents()
 {
-	Super::BeginPlay();
-	
 }
 
-// Called every frame
-void AShimEvents::Tick( float DeltaTime )
-{
-	Super::Tick( DeltaTime );
-
+void ShimEvents::init(TSharedPtr<FJsonObject> evtJs) {
+	FString id = evtJs->GetStringField("id");
+	evtTemplate = ShimEventsTemplate::getTemplate(id);
+	if (evtTemplate == nullptr) {
+		evtTemplate = new ShimEventsTemplate();
+		evtTemplate->setInfos(evtJs);
+	}
 }
-

@@ -6,6 +6,7 @@
 ShimPlayer::ShimPlayer()
 {
 	listOfPlayer.push_back(this);
+	id = "-1";
 }
 
 ShimPlayer* ShimPlayer::getPlayerById(FString id) {
@@ -35,7 +36,6 @@ void ShimPlayer::loadMissions(TArray <TSharedPtr<FJsonValue>> missionsJs) {
 		tempMission->setStatus(status);
 		listOfMission.push_back(tempMission);
 	}
-
 
 }
 

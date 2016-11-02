@@ -26,8 +26,12 @@ public:
 		virtual void BeginPlay() override;
 		UFUNCTION(BlueprintCallable, Category = "Shimstar|ShimPlayerController")
 		void updateMission();
-		UFUNCTION(Server,Reliable, WithValidation)
+		UFUNCTION(Server,Reliable, WithValidation, BlueprintCallable, Category = "Shimstar|ShimPlayerController")
 			void setIdPlayerToServer(const FString& id);
+		UFUNCTION(Client, Reliable, WithValidation, BlueprintCallable, Category = "Shimstar|ShimPlayerController")
+			void postLogin();
 		UFUNCTION(BlueprintCallable, Category = "Shimstar|ShimPlayerController")
 			void checkMessageServer();
+		ShimPlayer* getAssociatedPlayer() { return associatedPlayer; };
+
 };

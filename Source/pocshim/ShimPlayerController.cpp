@@ -11,8 +11,7 @@ void AShimPlayerController::Possess(APawn* InPawn)
 			widgetMission = CreateWidget<UUserWidgetMissionClass>(this, missionWidgetBP);
 			widgetMission->AddToViewport();
 		}
-	}
-	
+	}	
 }
 
 void AShimPlayerController::checkMessageServer() {
@@ -45,7 +44,6 @@ void AShimPlayerController::checkMessageServer() {
 	}
 }
 
-
 void AShimPlayerController::BeginPlay() {
 	Super::BeginPlay();
 	associatedPlayer = nullptr;
@@ -59,14 +57,26 @@ void AShimPlayerController::BeginPlay() {
 					widgetMission->DrawMissionToBP(currentPlayer->getMission());
 				}	
 			}
-			setIdPlayerToServer(currentPlayer->getId());
 		}
+	}
+	
+}
+
+void AShimPlayerController::postLogin_Implementation() {
+	ShimPlayer *currentPlayer = ShimPlayer::getInstance();
+	if (currentPlayer) {
+		setIdPlayerToServer(currentPlayer->getId());
 	}
 }
 
 
+bool AShimPlayerController::postLogin_Validate() {
+	return true;
+}
+
 
 void AShimPlayerController::setIdPlayerToServer_Implementation(const FString& id) {
+	if (associatedPlayer != nullptr) 	UE_LOG(ShimLog, Warning, TEXT("AShimPlayerController::setIdPlayerToServer_Implementation :: assocaited player not null! !!! ! !"));
 	associatedPlayer = new ShimPlayer();
 	associatedPlayer->setId(id);
 	UShimServer * instance = UShimServer::getInstance();
@@ -75,9 +85,7 @@ void AShimPlayerController::setIdPlayerToServer_Implementation(const FString& id
 	}
 }
 
-
 bool AShimPlayerController::setIdPlayerToServer_Validate(const FString &id) {
-	//if (associatedPlayer == nullptr) return false;
 	return true;
 }
 
@@ -101,5 +109,3 @@ void AShimPlayerController::updateMission() {
 		}
 	}
 }
-
-

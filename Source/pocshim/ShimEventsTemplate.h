@@ -14,7 +14,7 @@ class POCSHIM_API ShimEventsTemplate
 private:
 	static std::vector<ShimEventsTemplate *> listOfEvents;
 	FString name;
-	int id;
+	FString id;
 	int relatedMission;
 	int possibility;
 	bool reproduceEvenMissionFinished;
@@ -24,7 +24,7 @@ private:
 public:
 	ShimEventsTemplate();
 	~ShimEventsTemplate();
-
 	static void loadEvents();
+	static ShimEventsTemplate *getTemplate(FString id);
 	void setInfos(TSharedPtr<FJsonObject>);
 };
