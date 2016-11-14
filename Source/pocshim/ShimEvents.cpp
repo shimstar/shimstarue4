@@ -21,3 +21,11 @@ void ShimEvents::init(TSharedPtr<FJsonObject> evtJs) {
 		evtTemplate->setInfos(evtJs);
 	}
 }
+
+void ShimEvents::setTemplate(ShimEventsTemplate* pTemplate) {
+	evtTemplate = pTemplate;
+}
+
+void ShimEvents::setNbShipSpawn(int32 nb) {
+	nbShipSpawn = nb;
+}

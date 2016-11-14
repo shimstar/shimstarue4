@@ -2,7 +2,9 @@
 
 #pragma once
 #include "ShimMissionTemplate.h"
+#include "ShimObjectifTemplate.h"
 #include "ShimObjectif.h"
+#include "ShimEvents.h"
 
 /**
  * 
@@ -15,9 +17,10 @@ class POCSHIM_API ShimMission
 	int status; //0 WIP, 1 Finished
 	ShimObjectif *objectif;
 	ShimMissionTemplate* missionTemplate;
+	std::vector<ShimObjectif *> listOfObjectif;
 public:
-	FString getName() { return name; };
-	FString getText() { return text; };
+	FString getName() ;
+	FString getText() ;
 	int getStatus() { return status; };
 	int getIdTemplate();
 	void setStatus(int pstatus) { status = pstatus; };
@@ -27,5 +30,6 @@ public:
 	void updateObjectif(int ship);
 	ShimMission();
 	~ShimMission();
+	std::vector<ShimObjectif*> getObjectifs() { return listOfObjectif; };
 
 };

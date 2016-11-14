@@ -9,7 +9,7 @@ void UUserWidgetMissionClass::DrawMissionToBP(ShimMission *mission) {
 		MissionName = FText::FromString(mission->getName());
 		MissionStatus = mission->getStatus();
 		MissionText = FText::FromString(mission->getText());
-		ObjectifText = FText::FromString(mission->getObjectifText());
+		/*ObjectifText = FText::FromString(mission->getObjectifText());*/
 		this->DrawMission();
 		this->DrawMissionText();
 	}

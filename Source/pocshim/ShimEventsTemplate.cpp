@@ -16,7 +16,16 @@ void ShimEventsTemplate::setInfos(TSharedPtr<FJsonObject> peventJs) {
 	spawnX = locationObject->GetIntegerField("x");
 	spawnY = locationObject->GetIntegerField("y");
 	spawnZ = locationObject->GetIntegerField("z");
+	texte = peventJs->GetStringField("text");
 
+}
+
+std::vector<int32> ShimEventsTemplate::getSpawnPos() {
+	std::vector<int32> pos;
+	pos.push_back(spawnX);
+	pos.push_back(spawnY);
+	pos.push_back(spawnZ);
+	return pos;
 }
 
 ShimEventsTemplate *ShimEventsTemplate::getTemplate(FString id) {

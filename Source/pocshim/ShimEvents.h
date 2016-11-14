@@ -14,4 +14,8 @@ public:
 	ShimEvents();
 	~ShimEvents();
 	void init(TSharedPtr<FJsonObject>);
+	void setTemplate(ShimEventsTemplate *);
+	ShimEventsTemplate *getTemplate() { return evtTemplate; };
+	int getNbShipSpawn() { return nbShipSpawn; };
+	void setNbShipSpawn(int32);
 };

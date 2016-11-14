@@ -6,6 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "UserWidgetMissionClass.h"
 #include "ShimPlayer.h"
+#include <iostream>
+#include <exception>
 #include "ShimPlayerController.generated.h"
 
 /**
@@ -18,9 +20,12 @@ class POCSHIM_API AShimPlayerController : public APlayerController
 	
 private:
 	ShimPlayer *associatedPlayer;
-	UUserWidgetMissionClass *widgetMission;
+	UPROPERTY()
+	UUserWidgetMissionClass *widgetMission = nullptr;
 	UPROPERTY(EditDefaultsOnly)
 		TSubclassOf<UUserWidgetMissionClass> missionWidgetBP;
+	int initialise = 0;
+	void init();
 public:
 		virtual void Possess(APawn* InPawn) override;
 		virtual void BeginPlay() override;

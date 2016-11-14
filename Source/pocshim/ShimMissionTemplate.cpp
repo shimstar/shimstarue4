@@ -4,8 +4,10 @@
 #include "ShimMissionTemplate.h"
 
 void ShimMissionTemplate::init(TSharedPtr<FJsonObject> missionJs) {
+	
 	id = missionJs->GetIntegerField("id");
 	name = missionJs->GetStringField("name");
+
 	type = missionJs->GetStringField("type");
 	location = missionJs->GetStringField("location");
 	TSharedPtr<FJsonObject> npc = missionJs->GetObjectField("npc");
@@ -13,7 +15,11 @@ void ShimMissionTemplate::init(TSharedPtr<FJsonObject> missionJs) {
 	faceNpc = npc->GetStringField("face");
 	TSharedPtr<FJsonObject> dialogs = missionJs->GetObjectField("text");
 	newText = dialogs->GetStringField("new");
-
+	TSharedPtr<FJsonObject> objectifJs = missionJs->GetObjectField("objectif");
+	ShimObjectifTemplate *tempObjectif = new ShimObjectifTemplate();
+	tempObjectif->loadObjectif(objectifJs);
+	listOfObjectif.push_back(tempObjectif);
+	
 	ShimMissionTemplate::addMissionTemplate(this);
 }
 

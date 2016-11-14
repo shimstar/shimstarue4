@@ -7,11 +7,20 @@ void AShimPlayerController::Possess(APawn* InPawn)
 {
 	Super::Possess(InPawn);
 	if(this->HasAuthority() == false ){
+		if (initialise == 0) init();
+	}	
+}
+
+void AShimPlayerController::init() {
+	if (this->HasAuthority() == false) {
 		if (missionWidgetBP) {
 			widgetMission = CreateWidget<UUserWidgetMissionClass>(this, missionWidgetBP);
 			widgetMission->AddToViewport();
+			initialise = 1;
 		}
-	}	
+	}
+	
+	//UE_LOG(ShimLog, Warning, TEXT("AShimPlayerController::initiliase"));
 }
 
 void AShimPlayerController::checkMessageServer() {
@@ -50,13 +59,7 @@ void AShimPlayerController::BeginPlay() {
 	if (this->HasAuthority() == false) {
 		ShimPlayer *currentPlayer = ShimPlayer::getInstance();
 		if(currentPlayer){
-			if (missionWidgetBP) {
-				widgetMission = CreateWidget<UUserWidgetMissionClass>(this, missionWidgetBP);
-				if(currentPlayer->getMission()){
-					widgetMission->AddToViewport();
-					widgetMission->DrawMissionToBP(currentPlayer->getMission());
-				}	
-			}
+			if (initialise == 0) init();
 		}
 	}
 	
@@ -94,8 +97,10 @@ void AShimPlayerController::updateMission() {
 		ShimPlayer *currentPlayer = ShimPlayer::getInstance();
 
 		currentPlayer->updateMission();
-		if (currentPlayer->getMission()) {
-			if (missionWidgetBP) {
+		if (initialise == 0) init();
+
+		if (currentPlayer->getMission() != nullptr) {
+			if (widgetMission != nullptr) {
 				if (!widgetMission->IsInViewport()) {
 					widgetMission->AddToViewport();
 				}
@@ -103,9 +108,12 @@ void AShimPlayerController::updateMission() {
 			}
 		}
 		else {
-			if (widgetMission->IsInViewport()) {
-				widgetMission->RemoveFromViewport();
+			if (widgetMission != nullptr) {
+				if (widgetMission->IsInViewport()) {
+					widgetMission->RemoveFromViewport();
+				}
 			}
 		}
+		
 	}
 }

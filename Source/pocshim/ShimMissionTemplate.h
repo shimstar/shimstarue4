@@ -2,6 +2,7 @@
 
 #pragma once
 #include <vector>
+#include "ShimObjectifTemplate.h"
 /**
  * 
  */
@@ -17,6 +18,7 @@ private:
 	FString newText;
 	static std::vector<ShimMissionTemplate *> listOfMissions;
 	static void addMissionTemplate(ShimMissionTemplate *);
+	std::vector<ShimObjectifTemplate *> listOfObjectif;
 public:
 	void init(TSharedPtr<FJsonObject>);
 	ShimMissionTemplate();
@@ -27,6 +29,7 @@ public:
 	FString getName() { return name; };
 	FString getNewText() { return newText; };
 	int getId() { return id; };
+	std::vector<ShimObjectifTemplate *> getObjectifs() { return listOfObjectif; };
 	static ShimMissionTemplate *getTemplateById(int);
 	static void loadMissions();
 	static std::vector<ShimMissionTemplate *> getListOfMissionTemplate();

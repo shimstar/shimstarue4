@@ -47,7 +47,14 @@ ShimPlayer::~ShimPlayer()
 }
 
 ShimMission *ShimPlayer::getMission() {
-	return NULL;
+	ShimMission *temp = nullptr;
+	for (int i = 0; i < listOfMission.size(); i++) {
+		if (listOfMission[i]->getStatus() == 0) {
+			temp = listOfMission[i];
+			break;
+		}
+	}
+	return temp;
 }
 
 ShimPlayer* ShimPlayer::getInstance() {

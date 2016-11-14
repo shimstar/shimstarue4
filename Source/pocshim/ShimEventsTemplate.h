@@ -15,6 +15,7 @@ private:
 	static std::vector<ShimEventsTemplate *> listOfEvents;
 	FString name;
 	FString id;
+	FString texte;
 	int relatedMission;
 	int possibility;
 	bool reproduceEvenMissionFinished;
@@ -27,4 +28,5 @@ public:
 	static void loadEvents();
 	static ShimEventsTemplate *getTemplate(FString id);
 	void setInfos(TSharedPtr<FJsonObject>);
+	std::vector<int32> getSpawnPos();
 };
