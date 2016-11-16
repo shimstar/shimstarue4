@@ -34,15 +34,16 @@ FString ShimMission::getObjectifText() {
 
 void ShimMission::setTemplate(int idTemplate) {
 	missionTemplate = ShimMissionTemplate::getTemplateById(idTemplate);
-	std::vector<ShimObjectifTemplate*> listOfObjectifTemplate = missionTemplate->getObjectifs();
-	if (listOfObjectifTemplate.size() > 0) {
-		for (int i = 0; i < listOfObjectif.size(); i++) {
-			ShimObjectif *temp = new ShimObjectif();
-			temp->setTemplate(listOfObjectifTemplate[i]);
-			listOfObjectif.push_back(temp);
+	if (missionTemplate != nullptr){
+		std::vector<ShimObjectifTemplate*> listOfObjectifTemplate = missionTemplate->getObjectifs();
+		if (listOfObjectifTemplate.size() > 0) {
+			for (int i = 0; i < listOfObjectifTemplate.size(); i++) {
+				ShimObjectif *temp = new ShimObjectif();
+				temp->setTemplate(listOfObjectifTemplate[i]);
+				listOfObjectif.push_back(temp);
+			}
 		}
 	}
-	
 }
 
 FString ShimMission::getName() {

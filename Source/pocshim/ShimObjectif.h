@@ -11,7 +11,7 @@ class POCSHIM_API ShimObjectif
 private:
 	int actualNbShip;
 	int status;
-	ShimEvents *evt;
+	ShimEvents *evt = nullptr;
 	ShimObjectifTemplate *templateObjectif;
 public:
 	FString getObjectif();

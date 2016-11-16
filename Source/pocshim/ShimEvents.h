@@ -8,7 +8,7 @@
  */
 class POCSHIM_API ShimEvents
 {
-	ShimEventsTemplate *evtTemplate;
+	ShimEventsTemplate *evtTemplate = nullptr;
 	int nbShipSpawn;
 public:
 	ShimEvents();

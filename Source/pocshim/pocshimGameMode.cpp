@@ -19,7 +19,6 @@ void ApocshimGameMode::Tick(float DeltaTime)
 			ShimPlayer *pl = spc->getAssociatedPlayer();
 			if (pl != nullptr) {
 				std::vector<ShimMission *> lom = pl->getListOfMission();
-				int32 ll = lom.size();
 				if (lom.size() > 0) {
 					for (int i = 0; i < lom.size(); i++) {
 						int32 s = lom[i]->getStatus();
@@ -40,34 +39,16 @@ void ApocshimGameMode::Tick(float DeltaTime)
 													evtObj->setNbShipSpawn(evtObj->getNbShipSpawn() + 1);
 												}
 											}
+											
 										}
 									}
 								}
 							}
-						/*	std::vector<ShimEvents *>events = lom[i]->getEvents();
-							int32 l = events.size();
-							if (events.size() > 0) {
-								for (int itEvent = 0; itEvent < events.size(); itEvent++) {
-									ShimEventsTemplate* tplEvent = events[itEvent]->getTemplate();
-									if (tplEvent != nullptr) {
-										if (events[itEvent]->getNbShipSpawn() == 0) {
-											FActorSpawnParameters SpawnInfo;
-											FVector  loc = FVector(1000.0f, 1000.0f, 0.0f);
-											FRotator rot = FRotator(0.0f, 0.0f, 0.0f);
-											GetWorld()->SpawnActor<ADarkFIghterClass>(df_pawnai_bp, loc, rot);
-											events[itEvent]->setNbShipSpawn(events[itEvent]->getNbShipSpawn() + 1);
-										}
-									}
-								}
-							}*/
 						}
 					}
 				}
 			}
-			
-
 		}
-
 	}
 }
 

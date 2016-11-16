@@ -18,7 +18,7 @@ private:
 	FString newText;
 	static std::vector<ShimMissionTemplate *> listOfMissions;
 	static void addMissionTemplate(ShimMissionTemplate *);
-	std::vector<ShimObjectifTemplate *> listOfObjectif;
+	std::vector<ShimObjectifTemplate *> listOfObjectifTemplate;
 public:
 	void init(TSharedPtr<FJsonObject>);
 	ShimMissionTemplate();
@@ -29,7 +29,7 @@ public:
 	FString getName() { return name; };
 	FString getNewText() { return newText; };
 	int getId() { return id; };
-	std::vector<ShimObjectifTemplate *> getObjectifs() { return listOfObjectif; };
+	std::vector<ShimObjectifTemplate *> getObjectifs() { return listOfObjectifTemplate; };
 	static ShimMissionTemplate *getTemplateById(int);
 	static void loadMissions();
 	static std::vector<ShimMissionTemplate *> getListOfMissionTemplate();

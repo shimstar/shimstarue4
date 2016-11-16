@@ -5,12 +5,15 @@
 
 ShimObjectif::ShimObjectif()
 {
+	evt = nullptr;
 	actualNbShip = 0;
 	status = 0;
 }
 
 void ShimObjectif::setTemplate(ShimObjectifTemplate *pTemplate) {
 	templateObjectif = pTemplate;
+	evt = new ShimEvents();
+	evt->setTemplate(templateObjectif->getEventTemplate());
 }
 
 void ShimObjectif::UpdateObjectif(int ship) {

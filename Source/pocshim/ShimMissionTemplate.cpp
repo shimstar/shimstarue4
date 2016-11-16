@@ -18,8 +18,7 @@ void ShimMissionTemplate::init(TSharedPtr<FJsonObject> missionJs) {
 	TSharedPtr<FJsonObject> objectifJs = missionJs->GetObjectField("objectif");
 	ShimObjectifTemplate *tempObjectif = new ShimObjectifTemplate();
 	tempObjectif->loadObjectif(objectifJs);
-	listOfObjectif.push_back(tempObjectif);
-	
+	listOfObjectifTemplate.push_back(tempObjectif);
 	ShimMissionTemplate::addMissionTemplate(this);
 }
 
