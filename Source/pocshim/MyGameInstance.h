@@ -31,6 +31,10 @@ public:
 		UFUNCTION(BlueprintCallable, Category = "Shimstar|MyGameInstance")
 			void loginShimstar(FString login, FString password);
 		UFUNCTION(BlueprintCallable, Category = "Shimstar|MyGameInstance")
+			void createUserShimstar(FString login, FString password);
+		UFUNCTION(BlueprintCallable, Category = "Shimstar|MyGameInstance")
+			int32 statusCreateUser();
+		UFUNCTION(BlueprintCallable, Category = "Shimstar|MyGameInstance")
 			int32 statusLogin();
 		UFUNCTION(BlueprintCallable, Category = "Shimstar|MyGameInstance")
 			void callServer();

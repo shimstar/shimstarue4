@@ -10,7 +10,7 @@
 				"face" : "face3"
 			},
 			"text" : {
-				"new" : "Un pirate s'amuse dans la zone, il detruit tout ce qui bouge\n\nS'il vous plait, arretez le!!\n\nDetruisez le, il nous fait pas mal de dêgats.",
+				"new" : "Un pirate s'amuse dans la zone, il detruit tout ce qui bouge\n\nS'il vous plait, arretez le!!\n\nDetruisez le, il nous fait pas mal de degats.",
 				"inprogress" : "ipsem lorem",
 				"finish" : "Felicitations"
 			},
@@ -20,6 +20,18 @@
 				"typeObjectif" : 1,
 				"custom" : {
 					"nbShip":"1"
+				},
+				"event":{
+					"id":"1_1_1",
+					"typeevt":"spawn",
+					"location":{
+						"x":2000,
+						"y":2500,
+						"z":2500
+					},
+					"text" : "Un pirate s'amuse dans la zone, il detruit tout ce qui bouge\n\nS'il vous plait, arretez le!!\n\nDetruisez le, il nous fait pas mal de degats.",
+					"typeship":"darkfighterai",
+					"nb":1
 				}
 			}
 		},
@@ -43,6 +55,18 @@
 				"typeObjectif" : 1,
 				"custom" : {
 					"nbShip":"2"
+				},
+				"event":{
+					"id":"1_1_1",
+					"typeevt":"spawn",
+					"location":{
+						"x":2000,
+						"y":2500,
+						"z":2500
+					},
+					"text" : "Voila du renfort\n Arretez les!!!",
+					"typeship":"darkfighterai",
+					"nb":1
 				}
 			},
 			"prerequisite" : {

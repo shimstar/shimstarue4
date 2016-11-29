@@ -17,8 +17,13 @@ int ShimMission::getIdTemplate() {
 }
 
 void ShimMission::updateObjectif(int ship) {
-	objectif->UpdateObjectif(ship);
-	status = objectif->getStatus();
+	for (int i = 0; i < listOfObjectif.size(); i++) {
+		ShimObjectif *obj = listOfObjectif[i];
+		if (obj->getStatus() == 0) {
+			obj->UpdateObjectif(ship);
+	//		status = objectif->getStatus();
+		}
+	}
 }
 
 ShimMission::~ShimMission()
@@ -26,8 +31,11 @@ ShimMission::~ShimMission()
 }
 
 FString ShimMission::getObjectifText() {
-	if (missionTemplate) {
-		
+	for (int i = 0; i < listOfObjectif.size(); i++) {
+		ShimObjectif *obj = listOfObjectif[i];
+		if (obj->getStatus() == 0) {
+			return obj->getObjectifText();
+		}
 	}
 	return "";
 }

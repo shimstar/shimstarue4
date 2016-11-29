@@ -25,7 +25,7 @@ void ShimObjectif::UpdateObjectif(int ship) {
 	}
 }
 
-FString ShimObjectif::getObjectif() {
+FString ShimObjectif::getObjectifText() {
 	FString result = "";
 	if (templateObjectif != nullptr) {
 		result = templateObjectif->getName() + " : " + FString::FromInt(actualNbShip) + " / " + FString::FromInt(templateObjectif->getNbShip());

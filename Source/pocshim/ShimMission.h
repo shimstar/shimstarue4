@@ -15,7 +15,6 @@ class POCSHIM_API ShimMission
 	FString name;
 	FString text;
 	int status; //0 WIP, 1 Finished
-	ShimObjectif *objectif;
 	ShimMissionTemplate* missionTemplate;
 	std::vector<ShimObjectif *> listOfObjectif;
 public:

@@ -10,6 +10,41 @@ void UMyGameInstance::loginShimstar(FString login, FString password) {
 	}
 }
 
+void UMyGameInstance::createUserShimstar(FString login, FString password) {
+	UShimServer * instance = UShimServer::getInstance();
+	if (instance) {
+		instance->sendMsg(TEXT("{\"code\":\"7\",\"name\":\"" + login + "\",\"password\":\"" + password + "\"}"));
+	}
+}
+
+int32 UMyGameInstance::statusCreateUser() {
+	int32 returnStatus = -1;
+	UShimServer * instance = UShimServer::getInstance();
+	if (instance) {
+		bool connected = instance->isConnected();
+		if (!connected) {
+			connected = instance->connect();
+		}
+		if (connected) {
+			MessageServer *message = instance->getMessage("7", true);
+			if (message) {
+				returnStatus = FCString::Atoi(*message->getValue("status"));
+				if (returnStatus == 1) {
+					ShimPlayer *currentPlayer = ShimPlayer::getInstance();
+					if (currentPlayer) {
+						TSharedPtr<FJsonObject> jsonObj = message->getObj();
+						TSharedPtr<FJsonObject> userJson = jsonObj->GetObjectField("userJson");
+						FString tempId = userJson->GetStringField("id");
+						currentPlayer->setId(tempId);
+					}
+				}
+			}
+		}
+	}
+	return returnStatus;
+}
+
+
 int32 UMyGameInstance::statusLogin() {
 	int32 returnStatus = -1;
 	UShimServer * instance = UShimServer::getInstance();

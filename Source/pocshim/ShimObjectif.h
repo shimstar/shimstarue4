@@ -14,7 +14,7 @@ private:
 	ShimEvents *evt = nullptr;
 	ShimObjectifTemplate *templateObjectif;
 public:
-	FString getObjectif();
+	FString getObjectifText();
 	void setTemplate(ShimObjectifTemplate*);
 	void UpdateObjectif(int ship);
 	int getStatus() { return status; };
